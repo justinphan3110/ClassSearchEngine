@@ -1,5 +1,8 @@
 import scrapy
 import csv
+from pymongo import MongoClient
+import pdb
+import re   
 
 class StockSpider(scrapy.Spider):
   name = "class"
@@ -11,6 +14,11 @@ class StockSpider(scrapy.Spider):
   writer = csv.DictWriter(file_name, fieldnames=['CODE', 'ID', 'NAME', 'Unit', 'Description'])
   writer.writeheader()
 
+  def __init__(self):
+        connection = MongoClient('localhost', 27017)
+        db = connection['classCrawling']
+        db['class'].drop()
+        self.collection = db['class']
 
   def parse(self, response):
     #  title = response.xpath("//html/body[@class=' coursedescs']/div[@id='content-wrapper']/div[@class='wrap clearfix']/div[@id='right-col']/div[@id='content']/div[@id='textcontainer']/ul[1]/li[1]/a/strong/text()").extract()[0]
@@ -33,7 +41,17 @@ class StockSpider(scrapy.Spider):
         title = response.xpath("/html/body/div[@id='content-wrapper']/div[@class='wrap clearfix']/div[@id='right-col']/div[@id='content']/div[@id='textcontainer']/div[@class='sc_sccoursedescs']/div[@class='courseblock']["+ str(n) +"]/p[@class='courseblocktitle']/strong/text()").get()
         description = response.xpath("/html/body/div[@id='content-wrapper']/div[@class='wrap clearfix']/div[@id='right-col']/div[@id='content']/div[@id='textcontainer']/div[@class='sc_sccoursedescs']/div[@class='courseblock'][" + str(n) + "]/p[@class='courseblockdesc']/text()").get()
         if title is not None and description is not None:
-            self.writeCSV(title, description)
+            self.writeMongo(title, description)
+
+
+  def writeMongo(self,title, description):
+      self.collection.insert_one({'CODE': title.split('.')[0].split()[0].strip()
+                         , 'ID': title.split('.')[0].split()[1].strip()
+                         , 'NAME': title.split('.')[1].strip()
+                         , 'Unit': title.split('.')[2].strip().rsplit(' ', 1)[0].strip()
+                         , 'Description': description[1:-1]})
+
+
 
   def writeCSV(self, title, description):
     # title = title.split('.')
