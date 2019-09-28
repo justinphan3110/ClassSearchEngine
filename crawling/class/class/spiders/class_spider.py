@@ -9,10 +9,8 @@ class StockSpider(scrapy.Spider):
   mainUrl = 'http://bulletin.case.edu/course-descriptions/'
   start_urls = ['http://bulletin.case.edu/course-descriptions/#text']
   courseList = []
+  writer = None
 
-  file_name = open('class.csv','w')
-  writer = csv.DictWriter(file_name, fieldnames=['CODE', 'ID', 'NAME', 'Unit', 'Description'])
-  writer.writeheader()
 
   def __init__(self):
         connection = MongoClient('localhost', 27017)
@@ -41,7 +39,8 @@ class StockSpider(scrapy.Spider):
         title = response.xpath("/html/body/div[@id='content-wrapper']/div[@class='wrap clearfix']/div[@id='right-col']/div[@id='content']/div[@id='textcontainer']/div[@class='sc_sccoursedescs']/div[@class='courseblock']["+ str(n) +"]/p[@class='courseblocktitle']/strong/text()").get()
         description = response.xpath("/html/body/div[@id='content-wrapper']/div[@class='wrap clearfix']/div[@id='right-col']/div[@id='content']/div[@id='textcontainer']/div[@class='sc_sccoursedescs']/div[@class='courseblock'][" + str(n) + "]/p[@class='courseblockdesc']/text()").get()
         if title is not None and description is not None:
-            self.writeMongo(title, description)
+            self.writeMongo(title.lower(), description.lower())
+            self.initAndWriteCSV(title.lower(), description.lower())
 
 
   def writeMongo(self,title, description):
@@ -52,11 +51,18 @@ class StockSpider(scrapy.Spider):
                          , 'Description': description[1:-1]})
 
 
+  def initAndWriteCSV(self, title, description):
+      if self.writer is None:
+        file_name = open('class.csv','w')
+        self.writer = csv.DictWriter(file_name, fieldnames=['CODE', 'ID', 'NAME', 'Unit', 'Description'])
+        self.writer.writeheader()
+      self.writeCSV(title.lower(), description)
+
 
   def writeCSV(self, title, description):
     # title = title.split('.')
     # print(title)
-    print(description)
+    print(description[1:-1])
     self.writer.writerow({'CODE': title.split('.')[0].split()[0].strip()
                          , 'ID': title.split('.')[0].split()[1].strip()
                          , 'NAME': title.split('.')[1].strip()
