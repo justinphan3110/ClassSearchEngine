@@ -120,7 +120,7 @@ public class ElasticSearchAPI {
     public static void main(String[] args) throws IOException {
         ElasticSearchAPI api = ElasticSearchAPI.of(defaultINDEX);
         api.makeConnection();
-        List<Class> ans = api.boolSearch("Description", "NAME", 5,5, "");
+        List<Class> ans = api.boolSearch("Description", "NAME", 5,5, "stock");
         System.out.println(ans);
 
         api.closeConnection();

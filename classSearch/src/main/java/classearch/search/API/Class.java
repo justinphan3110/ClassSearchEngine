@@ -53,15 +53,14 @@ public class Class {
 
     @Override
     public String toString() {
-//        return "Class{" +
-//                "CODE='" + CODE + '\'' +
-//                ", ID='" + ID + '\'' +
-//                ", NAME='" + NAME + '\'' +
-//                ", DESCRIPTION='" + DESCRIPTION + '\'' +
-//                ", UNIT='" + UNIT + '\'' +
-//                ", Json='" + Json + '\'' +
-//                '}';
-        return "Unit: " + this.UNIT;
+        return "Class{" +
+                "CODE='" + CODE + '\'' +
+                ", ID='" + ID + '\'' +
+                ", NAME='" + NAME + '\'' +
+                ", DESCRIPTION='" + DESCRIPTION + '\'' +
+                ", UNIT='" + UNIT + '\'' +
+                ", Json='" + Json + '\'' +
+                '}';
     }
 
     public static final Class of(String code, String id, String name, String description, String unit, String json){
