@@ -6,10 +6,24 @@ import io.vertx.core.json.JsonObject;
 
 
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.Credentials;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
@@ -24,9 +38,15 @@ import java.util.Objects;
 public class ElasticSearchAPI {
     public static final String defaultINDEX = "classes";
 
+    // localHost credentials
     private static final String HOST = "localhost";
     private static final int PORT_ONE = 9200;
     private static final String SCHEME = "http";
+
+    // cloud credentials
+    private static final String USE_NAME = "elastic";
+    private static final String PASSWORD = "M7vbKNXotX9fLKZqQpv5cfxq";
+    private static final String END_URL = "94a45c0e05584bedaca8de4e7b5564b8.us-central1.gcp.cloud.es.io";
 
     private static RestHighLevelClient client;
     private String index;
@@ -42,6 +62,23 @@ public class ElasticSearchAPI {
 
     }
 
+    public  final RestHighLevelClient makeConnectionLower(){
+        if(client == null) {
+            final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(USE_NAME, PASSWORD));
+            RestClientBuilder restClientBuilder = RestClient.builder(
+                    new HttpHost(END_URL, 9243,SCHEME))
+                    .setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
+                        @Override
+                        public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpAsyncClientBuilder) {
+                            return httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+                        }
+                    });
+            client = new RestHighLevelClient(restClientBuilder);
+        }
+        return client;
+    }
+
     public final RestHighLevelClient makeConnection() {
         if(client == null) {
             try {
@@ -49,7 +86,6 @@ public class ElasticSearchAPI {
                 client = new RestHighLevelClient(RestClient.builder(
                         new HttpHost(HOST, PORT_ONE, SCHEME)
                 ));
-
                 System.out.println("connected to elastic search");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -119,7 +155,8 @@ public class ElasticSearchAPI {
 
     public static void main(String[] args) throws IOException {
         ElasticSearchAPI api = ElasticSearchAPI.of(defaultINDEX);
-        api.makeConnection();
+        api.makeConnectionLower();
+        System.out.println("connected");
         List<Class> ans = api.boolSearch("Description", "NAME", 5,5, "stock");
         System.out.println(ans);
 
