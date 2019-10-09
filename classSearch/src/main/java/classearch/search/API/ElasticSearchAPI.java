@@ -62,12 +62,16 @@ public class ElasticSearchAPI {
 
     }
 
+    public boolean isConnected(){
+        return this.client != null;
+    }
+
     public  final RestHighLevelClient makeConnectionLower(){
         if(client == null) {
             final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(USE_NAME, PASSWORD));
             RestClientBuilder restClientBuilder = RestClient.builder(
-                    new HttpHost(END_URL, 9243,SCHEME))
+                    new HttpHost(END_URL, 9243,"https"))
                     .setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
                         @Override
                         public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpAsyncClientBuilder) {
@@ -115,7 +119,7 @@ public class ElasticSearchAPI {
     }
 
     public List<Class> boolSearch(String text) throws IOException {
-        return boolSearch("Description", "NAME", 5,5, text);
+        return boolSearch("Description", "NAME", 10,10, text);
     }
 
     public List<Class> boolSearch(String field1, String field2, int slop1, int slop2, String text) throws IOException {
