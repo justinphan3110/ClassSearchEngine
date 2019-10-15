@@ -123,7 +123,7 @@ public class ElasticSearchAPI {
     }
 
     public List<Class> boolSearch(String field1, String field2, int slop1, int slop2, String text) throws IOException {
-        SearchRequest searchRequest = new SearchRequest(this.index);
+        SearchRequest searchRequest = new SearchRequest(defaultINDEX);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
 
@@ -159,7 +159,8 @@ public class ElasticSearchAPI {
 
     public static void main(String[] args) throws IOException {
         ElasticSearchAPI api = ElasticSearchAPI.of(defaultINDEX);
-        api.makeConnectionLower();
+//        api.makeConnectionLower();
+        api.makeConnection();
         System.out.println("connected");
         List<Class> ans = api.boolSearch("Description", "NAME", 5,5, "stock");
         System.out.println(ans);

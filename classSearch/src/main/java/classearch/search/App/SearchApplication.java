@@ -10,8 +10,8 @@ public class SearchApplication {
     public final static ElasticSearchAPI elasticSearchAPI = ElasticSearchAPI.of(ElasticSearchAPI.defaultINDEX);
 
     static {
-//        elasticSearchAPI.makeConnection();
-        elasticSearchAPI.makeConnectionLower();
+        elasticSearchAPI.makeConnection();
+//        elasticSearchAPI.makeConnectionLower();
     }
 
     public static void main(String[] args) {
