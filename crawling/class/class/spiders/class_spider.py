@@ -44,11 +44,12 @@ class StockSpider(scrapy.Spider):
 
 
   def writeMongo(self,title, description):
-      self.collection.insert_one({'CODE': title.split('.')[0].split()[0].strip()
-                         , 'ID': title.split('.')[0].split()[1].strip()
-                         , 'NAME': title.split('.')[1].strip()
+      self.collection.insert_one({'Subject': title.split('.')[0].split()[0].strip()
+                         , 'Catalog': title.split('.')[0].split()[1].strip()
+                         , 'Title': title.split('.')[1].strip()
                          , 'Unit': title.split('.')[2].strip().rsplit(' ', 1)[0].strip()
-                         , 'Description': description[1:-1]})
+                         , 'Description': description[1:-1]
+                         , 'Code': title.split('.')[0].split()[0].strip() + title.split('.')[0].split()[1].strip() + " / " + title.split('.')[0].split()[0].strip() + " " + title.split('.')[0].split()[1].strip()})
 
 
   def initAndWriteCSV(self, title, description):

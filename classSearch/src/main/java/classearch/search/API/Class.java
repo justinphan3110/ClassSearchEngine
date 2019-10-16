@@ -4,7 +4,7 @@ import java.util.Objects;
 public class Class {
     private final String SUBJECT;
     private final String ID;
-    private final String NAME;
+    private final String TITLE;
     private final String DESCRIPTION;
     private final String UNIT;
 
@@ -20,32 +20,32 @@ public class Class {
         Class aClass = (Class) o;
         return SUBJECT.equals(aClass.SUBJECT) &&
                 ID.equals(aClass.ID) &&
-                NAME.equals(aClass.NAME) &&
+                TITLE.equals(aClass.TITLE) &&
                 DESCRIPTION.equals(aClass.DESCRIPTION) &&
                 UNIT.equals(aClass.UNIT);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(SUBJECT, ID, NAME, DESCRIPTION, UNIT);
+        return Objects.hash(SUBJECT, ID, TITLE, DESCRIPTION, UNIT);
     }
 
     public String getID() {
         return ID;
     }
 
-    public String getNAME() {
-        return NAME;
+    public String getTITLE() {
+        return TITLE;
     }
 
     public String getDESCRIPTION() {
         return DESCRIPTION;
     }
 
-    private Class(String subject, String id, String name, String description, String unit, String json){
+    private Class(String subject, String id, String title, String description, String unit, String json){
         this.SUBJECT = subject;
         this.ID = id;
-        this.NAME = name;
+        this.TITLE = title;
         this.DESCRIPTION = description;
         this.UNIT = unit;
         this.Json = json;
@@ -56,7 +56,7 @@ public class Class {
         return "Class{" +
                 "SUBJECT='" + SUBJECT + '\'' +
                 ", ID='" + ID + '\'' +
-                ", NAME='" + NAME + '\'' +
+                ", TITLE='" + TITLE + '\'' +
                 ", DESCRIPTION='" + DESCRIPTION + '\'' +
                 ", UNIT='" + UNIT + '\'' +
                 ", Json='" + Json + '\'' +

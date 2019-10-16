@@ -28,10 +28,12 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,6 +52,9 @@ public class ElasticSearchAPI {
 
     private static RestHighLevelClient client;
     private String index;
+
+    private static final int defaultSLOP = 10;
+
 
     private ElasticSearchAPI(RestHighLevelClient client){
         this.client = client;
@@ -118,18 +123,18 @@ public class ElasticSearchAPI {
     }
 
     public List<Class> boolSearch(String index, String text) throws IOException {
-        return boolSearch(index, "Description", "NAME", 10,10, text);
+        return boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title","Code", "Instructor")), text);
     }
 
-    public List<Class> boolSearch(String index, String field1, String field2, int slop1, int slop2, String text) throws IOException {
+
+
+    public List<Class> boolSearch(String index, List<String> fields, String text) throws IOException {
         SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
 
-        MatchPhraseQueryBuilder matchPhraseQueryBuilder1 = new MatchPhraseQueryBuilder(field1, text).slop(slop1);
-        MatchPhraseQueryBuilder matchPhraseQueryBuilder2 = new MatchPhraseQueryBuilder(field2, text).slop(slop2);
-        qb.should(matchPhraseQueryBuilder1);
-        qb.should(matchPhraseQueryBuilder2);
+        for(String filed: fields)
+            qb.should(new MatchPhraseQueryBuilder(filed, text).slop(defaultSLOP));
 
         searchSourceBuilder.query(qb);
         searchRequest.source(searchSourceBuilder);
@@ -138,18 +143,32 @@ public class ElasticSearchAPI {
         return classExtract(searchResponse.toString());
     }
 
+    public List<Class> queryString(String index, String text) throws IOException {
+        SearchRequest searchRequest = new SearchRequest(index);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        QueryStringQueryBuilder qb = QueryBuilders.queryStringQuery(text);
+
+        searchSourceBuilder.query(qb);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        return  classExtract(searchResponse.toString());
+
+    }
+
     private List<Class> classExtract(String json){
         List<Class> result = new ArrayList<>();
         JsonObject jsonObject = new JsonObject(json);
         JsonArray classes = jsonObject.getJsonObject("hits").getJsonArray("hits");
+
         classes.forEach(cl -> {
            JsonObject source = ((JsonObject) cl).getJsonObject("_source");
            result.add(Class.of(
-                   source.getString("CODE"),
-                   source.getString("ID"),
-                   source.getString("NAME"),
+                   source.getString("Subject"),
+                   source.getString("Catalog"),
+                   source.getString("Title"),
                    source.getString("Description"),
-                   source.getString("UNIT"),
+                   source.getString("Unit"),
                    source.toString()
            ));
         });
@@ -160,7 +179,8 @@ public class ElasticSearchAPI {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
 
         System.out.println("connected");
-        List<Class> ans = api.boolSearch(defaultINDEX, "Description", "NAME", 5,5, "stock");
+//        List<Class> ans = api.boolSearch(defaultINDEX, "Description", "NAME", 5,5, "stock");
+        List<Class> ans = api.queryString(defaultINDEX, "stock");
         System.out.println(ans);
 
         api.closeConnection();

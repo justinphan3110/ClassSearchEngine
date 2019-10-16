@@ -31,9 +31,9 @@ class App extends Component {
         <tr>
           <td>{(c.subject.toUpperCase())}</td>
           <td>{c.id}</td>
-          <td>{c.name}</td>
+          <td>{c.title}</td>
           <td>{c.description}</td>
-          <td>Fall2019, Spring2020, Fall2018 </td>
+          <td></td>
         </tr>
       )
     });
@@ -65,7 +65,7 @@ class App extends Component {
             <tr>
               <th>SUBJECT</th>
               <th>ID</th>
-              <th>NAME</th>
+              <th>TITLE</th>
               <th>Description</th>
               <th>Class Info</th> 
             </tr>
