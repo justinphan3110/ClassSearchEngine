@@ -1,5 +1,5 @@
 # ClassSearchEngine
-A distributed, multi tenant-capable full-text search engine for more than 5000 classes at Case Western Reserve University
+A distributed, multi tenant-capable full-text search engine for more than 6000 classes at Case Western Reserve University
 
 ## Documents coming soon !
 
