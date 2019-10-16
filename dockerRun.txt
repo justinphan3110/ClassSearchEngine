@@ -5,6 +5,9 @@ docker start elastic
 docker stop elastic
 
 
+mongoexport:
+ mongoexport -d classCrawling -c 'Fall 2019' | sed '/"_id":/s/"_id":[^,]*,//' > fall2019.json
+
 
 -> start JavaSpringBoot in SearchApplication.java
 -> npm start website
