@@ -7,12 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SearchApplication {
-    public final static ElasticSearchAPI elasticSearchAPI = ElasticSearchAPI.of(ElasticSearchAPI.defaultINDEX);
-
-    static {
-        elasticSearchAPI.makeConnection();
-//        elasticSearchAPI.makeConnectionLower();
-    }
+    public final static ElasticSearchAPI elasticSearchAPI = ElasticSearchAPI.makeConnection();
 
     public static void main(String[] args) {
         if(elasticSearchAPI.isConnected())

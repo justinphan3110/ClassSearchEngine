@@ -11,7 +11,7 @@ class App extends Component {
   }
   
   updateSearch(){
-    axios.get('http://localhost:8080/search/' + this.state.searchText).then((response) =>{
+    axios.get('http://localhost:8080/search/classes/' + this.state.searchText).then((response) =>{
       this.setState({
         class: response.data
       })
@@ -29,10 +29,11 @@ class App extends Component {
     let cl = this.state.class.map((c) => {
       return (
         <tr>
-          <td>{(c.code.toUpperCase())}</td>
+          <td>{(c.subject.toUpperCase())}</td>
           <td>{c.id}</td>
           <td>{c.name}</td>
           <td>{c.description}</td>
+          <td>Fall2019, Spring2020, Fall2018 </td>
         </tr>
       )
     });
@@ -62,10 +63,11 @@ class App extends Component {
         <Table>
           <thead>
             <tr>
-              <th>CODE</th>
+              <th>SUBJECT</th>
               <th>ID</th>
               <th>NAME</th>
               <th>Description</th>
+              <th>Class Info</th> 
             </tr>
           </thead>
 

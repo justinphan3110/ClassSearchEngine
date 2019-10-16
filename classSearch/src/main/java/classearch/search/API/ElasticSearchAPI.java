@@ -51,22 +51,21 @@ public class ElasticSearchAPI {
     private static RestHighLevelClient client;
     private String index;
 
-    private ElasticSearchAPI(String index){
-        this.index = index;
+    private ElasticSearchAPI(RestHighLevelClient client){
+        this.client = client;
     }
 
-    public static final ElasticSearchAPI of(String index){
-        Objects.requireNonNull(index, "index can not be null");
+    private static ElasticSearchAPI of(RestHighLevelClient client){
+        Objects.requireNonNull(client, "client can not be null");
 
-        return new ElasticSearchAPI(index);
-
+        return new ElasticSearchAPI(client);
     }
 
     public boolean isConnected(){
         return this.client != null;
     }
 
-    public  final RestHighLevelClient makeConnectionLower(){
+    public static final ElasticSearchAPI makeConnectionLower(){
         if(client == null) {
             final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(USE_NAME, PASSWORD));
@@ -80,10 +79,10 @@ public class ElasticSearchAPI {
                     });
             client = new RestHighLevelClient(restClientBuilder);
         }
-        return client;
+        return ElasticSearchAPI.of(client);
     }
 
-    public final RestHighLevelClient makeConnection() {
+    public static final ElasticSearchAPI makeConnection() {
         if(client == null) {
             try {
                 System.out.println("making connection to elastic search");
@@ -96,7 +95,7 @@ public class ElasticSearchAPI {
             }
 
         }
-        return client;
+        return ElasticSearchAPI.of(client);
     }
 
     public final void closeConnection(){
@@ -118,12 +117,12 @@ public class ElasticSearchAPI {
         return classExtract(searchResponse.toString());
     }
 
-    public List<Class> boolSearch(String text) throws IOException {
-        return boolSearch("Description", "NAME", 10,10, text);
+    public List<Class> boolSearch(String index, String text) throws IOException {
+        return boolSearch(index, "Description", "NAME", 10,10, text);
     }
 
-    public List<Class> boolSearch(String field1, String field2, int slop1, int slop2, String text) throws IOException {
-        SearchRequest searchRequest = new SearchRequest(defaultINDEX);
+    public List<Class> boolSearch(String index, String field1, String field2, int slop1, int slop2, String text) throws IOException {
+        SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
 
@@ -158,11 +157,10 @@ public class ElasticSearchAPI {
     }
 
     public static void main(String[] args) throws IOException {
-        ElasticSearchAPI api = ElasticSearchAPI.of(defaultINDEX);
-//        api.makeConnectionLower();
-        api.makeConnection();
+        ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
+
         System.out.println("connected");
-        List<Class> ans = api.boolSearch("Description", "NAME", 5,5, "stock");
+        List<Class> ans = api.boolSearch(defaultINDEX, "Description", "NAME", 5,5, "stock");
         System.out.println(ans);
 
         api.closeConnection();

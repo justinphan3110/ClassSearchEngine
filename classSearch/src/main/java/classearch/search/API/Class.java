@@ -2,15 +2,15 @@ package classearch.search.API;
 import java.util.Objects;
 
 public class Class {
-    private final String CODE;
+    private final String SUBJECT;
     private final String ID;
     private final String NAME;
     private final String DESCRIPTION;
     private final String UNIT;
 
     private final String Json;
-    public String getCODE() {
-        return CODE;
+    public String getSUBJECT() {
+        return SUBJECT;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class Class {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Class aClass = (Class) o;
-        return CODE.equals(aClass.CODE) &&
+        return SUBJECT.equals(aClass.SUBJECT) &&
                 ID.equals(aClass.ID) &&
                 NAME.equals(aClass.NAME) &&
                 DESCRIPTION.equals(aClass.DESCRIPTION) &&
@@ -27,7 +27,7 @@ public class Class {
 
     @Override
     public int hashCode() {
-        return Objects.hash(CODE, ID, NAME, DESCRIPTION, UNIT);
+        return Objects.hash(SUBJECT, ID, NAME, DESCRIPTION, UNIT);
     }
 
     public String getID() {
@@ -42,8 +42,8 @@ public class Class {
         return DESCRIPTION;
     }
 
-    private Class(String code, String id, String name, String description, String unit, String json){
-        this.CODE = code;
+    private Class(String subject, String id, String name, String description, String unit, String json){
+        this.SUBJECT = subject;
         this.ID = id;
         this.NAME = name;
         this.DESCRIPTION = description;
@@ -54,7 +54,7 @@ public class Class {
     @Override
     public String toString() {
         return "Class{" +
-                "CODE='" + CODE + '\'' +
+                "SUBJECT='" + SUBJECT + '\'' +
                 ", ID='" + ID + '\'' +
                 ", NAME='" + NAME + '\'' +
                 ", DESCRIPTION='" + DESCRIPTION + '\'' +
