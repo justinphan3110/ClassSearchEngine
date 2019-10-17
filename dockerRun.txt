@@ -1,5 +1,6 @@
 elasticsearch
-docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.3.2
+docker run -p 92  mongoexport -d classCrawling -c 'class' | sed '/"_id":/s/"_id":[^,]*,//' > classes.json
+00:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.3.2
 
 docker start elastic
 docker stop elastic

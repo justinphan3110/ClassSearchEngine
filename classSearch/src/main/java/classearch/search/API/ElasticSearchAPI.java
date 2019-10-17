@@ -178,6 +178,10 @@ public class ElasticSearchAPI {
         return result;
     }
 
+    private List<Term> meetingExtract(String json){
+
+    }
+
     public static void main(String[] args) throws IOException {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
 

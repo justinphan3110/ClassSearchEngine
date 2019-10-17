@@ -17,9 +17,9 @@
   "Term": {
     "type": "nested",
     "properties": {
-        "fall2019": {
-            "type": "nested",
-            "properties":{
+                "Term":{
+                    "type": "text"
+                },
                 "Code":{
                     "type": "text"
                 },
@@ -35,28 +35,6 @@
                 "Instructor":{
                     "type": "text"
                 }
-            }
-        },
-        "spring2020": {
-            "type": "nested",
-            "properties":{
-                "Code":{
-                    "type": "text"
-                },
-                "Room" :{
-                    "type": "text"
-                },
-                "number":{
-                    "type": "text"
-                },
-                "DayTime":{
-                    "type": "text"
-                },
-                "Instructor":{
-                    "type": "text"
-                }
-            }
-        }
     }
   },
   "Title": {

@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import './App.css';
-import { Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
+import { Collapse,Card,CardBody, Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
 import axios from 'axios';
 
 class App extends Component {
   state ={
     class: [],
     newSearchModal: false,
+    moreInfoModal: false,
     searchText: "",
-    term: "classes"
+    term: "classes",
+    collapse : true
   }
   
   updateSearch(){
@@ -26,16 +28,41 @@ class App extends Component {
       newSearchModal: ! this.state.newSearchModal
     });
   }
- 
+
+  // toggleMoreInfo(c){
+  //   this.setState({
+  //     moreInfoModal: ! this.state.moreInfoModal
+  //   });
+
+  //   console.log(c.title);
+  // }
+  toggleMoreInfo(){
+    this.setState({
+      collapse : ! this.state.collapse
+    });
+    // console.log(collapse);
+  };
+
   render() {
     let cl = this.state.class.map((c) => {
+      // var collapse = true; 
+
       return (
         <tr>
           <td>{(c.subject.toUpperCase())}</td>
           <td>{c.id}</td>
           <td>{c.title}</td>
           <td>{c.description}</td>
-          <td></td>
+          <td>
+           <Button color="info" size="sm" onClick={this.toggleMoreInfo.bind(this)}>More Info</Button>
+           <Collapse isOpen={this.state.collapse}>
+            <Card>
+            <CardBody>
+              nooo
+            </CardBody>
+            </Card>
+          </Collapse>
+         </td>
         </tr>
       )
     });
@@ -54,18 +81,6 @@ class App extends Component {
                  });
               }}/>
             </FormGroup>
-            <FormGroup>
-                <Label for="departureTime">Term</Label>
-                <Input type="select"value={this.state.term} onChange = {(e) => {
-                  let {term} = this.state;
-                  term = e.target.value;
-                  this.setState({term});
-                }}>
-                    <option value="classes">Default</option>
-                    <option value="fall2019">Fall 2019</option>
-                    <option vaue="spring2020">Spring 2020</option>
-                </Input>
-               </FormGroup>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.updateSearch.bind(this)}>Search</Button>{' '}
@@ -80,8 +95,7 @@ class App extends Component {
               <th>SUBJECT</th>
               <th>ID</th>
               <th>TITLE</th>
-              <th>Description</th>
-              <th>Class Info</th> 
+              <th>Description</th> 
             </tr>
           </thead>
 

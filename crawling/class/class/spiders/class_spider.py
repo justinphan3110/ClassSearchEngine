@@ -59,17 +59,19 @@ class StockSpider(scrapy.Spider):
   def classInfo(self, code):
       query = {'Code': code}
       # print(code)
-      termDict = {}
+      termDict = []
       for term in self.termMap:
         termCol = self.db[self.termMap[term]]
         cursor = termCol.find(query)
-        meeting = []
+        # meeting = []
         for m in cursor:
           classNum = m['number']
           # del m['number']
           del m['_id']
-          meeting.append(m)
-        termDict.update({term: meeting})
+          m['Term'] = self.termMap[term]
+          termDict.append(m)
+        # if len(meeting) > 0:
+        #   termDict.append(meeting)
 
       return termDict
 
