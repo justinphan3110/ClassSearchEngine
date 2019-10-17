@@ -1,0 +1,65 @@
+{
+  "Catalog": {
+    "type": "keyword"
+  },
+  "Code": {
+    "type": "text"
+  },
+  "Credit": {
+    "type": "text"
+  },
+  "Description": {
+    "type": "text"
+  },
+  "Subject": {
+    "type": "keyword"
+  },
+  "Term": {
+    "type": "nested",
+    "properties": {
+        "fall2019": {
+            "type": "nested",
+            "properties":{
+                "Code":{
+                    "type": "text"
+                },
+                "Room" :{
+                    "type": "text"
+                },
+                "number":{
+                    "type": "text"
+                },
+                "DayTime":{
+                    "type": "text"
+                },
+                "Instructor":{
+                    "type": "text"
+                }
+            }
+        },
+        "spring2020": {
+            "type": "nested",
+            "properties":{
+                "Code":{
+                    "type": "text"
+                },
+                "Room" :{
+                    "type": "text"
+                },
+                "number":{
+                    "type": "text"
+                },
+                "DayTime":{
+                    "type": "text"
+                },
+                "Instructor":{
+                    "type": "text"
+                }
+            }
+        }
+    }
+  },
+  "Title": {
+    "type": "text"
+  }
+}

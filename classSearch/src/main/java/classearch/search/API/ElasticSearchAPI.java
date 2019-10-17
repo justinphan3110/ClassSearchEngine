@@ -123,7 +123,7 @@ public class ElasticSearchAPI {
     }
 
     public List<Class> boolSearch(String index, String text) throws IOException {
-        return boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title","Code", "Instructor")), text);
+        return boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title","Code")), text);
     }
 
 
@@ -182,8 +182,8 @@ public class ElasticSearchAPI {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
 
         System.out.println("connected");
-//        List<Class> ans = api.boolSearch(defaultINDEX, "Description", "NAME", 5,5, "stock");
-        List<Class> ans = api.queryString("fall2019", "eecs");
+        List<Class> ans = api.boolSearch(defaultINDEX, "acct100");
+//        List<Class> ans = api.queryString("fall2019", "eecs");
         System.out.println(ans);
 
         api.closeConnection();

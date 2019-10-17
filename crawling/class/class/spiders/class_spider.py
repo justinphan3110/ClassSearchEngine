@@ -53,21 +53,25 @@ class StockSpider(scrapy.Spider):
                          , 'Credit': title.split('.')[2].strip().rsplit(' ', 1)[0].strip()
                          , 'Description': description[1:-1]
                          , 'Code': subject + catalog + " / " + subject + " " + catalog
-                         , 'Term': '-'.join(self.classInfo(subject.upper() + catalog))
+                         , 'Term': self.classInfo(subject.upper() + catalog)
                          })
 
   def classInfo(self, code):
       query = {'Code': code}
       # print(code)
-      termAvailable = []
+      termDict = {}
       for term in self.termMap:
         termCol = self.db[self.termMap[term]]
         cursor = termCol.find(query)
+        meeting = []
         for m in cursor:
-          termAvailable.append(self.termMap[term])
-          break
-      print(termAvailable)
-      return termAvailable
+          classNum = m['number']
+          # del m['number']
+          del m['_id']
+          meeting.append(m)
+        termDict.update({term: meeting})
+
+      return termDict
 
 
   def initAndWriteCSV(self, title, description):
