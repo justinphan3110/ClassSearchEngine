@@ -9,14 +9,15 @@ class StockSpider(scrapy.Spider):
   mainUrl = 'http://bulletin.case.edu/course-descriptions/'
   start_urls = ['http://bulletin.case.edu/course-descriptions/#text']
   courseList = []
+  termMap = {'fall2019': 'Fall 2019', 'spring2020': 'Spring 2020'}
   writer = None
 
 
   def __init__(self):
         connection = MongoClient('localhost', 27017)
-        db = connection['classCrawling']
-        db['class'].drop()
-        self.collection = db['class']
+        self.db = connection['classCrawling']
+        self.db['class'].drop()
+        self.collection = self.db['class']
 
   def parse(self, response):
     #  title = response.xpath("//html/body[@class=' coursedescs']/div[@id='content-wrapper']/div[@class='wrap clearfix']/div[@id='right-col']/div[@id='content']/div[@id='textcontainer']/ul[1]/li[1]/a/strong/text()").extract()[0]
@@ -40,16 +41,33 @@ class StockSpider(scrapy.Spider):
         description = response.xpath("/html/body/div[@id='content-wrapper']/div[@class='wrap clearfix']/div[@id='right-col']/div[@id='content']/div[@id='textcontainer']/div[@class='sc_sccoursedescs']/div[@class='courseblock'][" + str(n) + "]/p[@class='courseblockdesc']/text()").get()
         if title is not None and description is not None:
             self.writeMongo(title.lower(), description.lower())
-            self.initAndWriteCSV(title.lower(), description.lower())
+            # self.initAndWriteCSV(title.lower(), description.lower())
 
 
   def writeMongo(self,title, description):
-      self.collection.insert_one({'Subject': title.split('.')[0].split()[0].strip()
+      subject = title.split('.')[0].split()[0].strip()
+      catalog = title.split('.')[0].split()[1].strip()
+      self.collection.insert_one({'Subject': subject
                          , 'Catalog': title.split('.')[0].split()[1].strip()
                          , 'Title': title.split('.')[1].strip()
-                         , 'Unit': title.split('.')[2].strip().rsplit(' ', 1)[0].strip()
+                         , 'Credit': title.split('.')[2].strip().rsplit(' ', 1)[0].strip()
                          , 'Description': description[1:-1]
-                         , 'Code': title.split('.')[0].split()[0].strip() + title.split('.')[0].split()[1].strip() + " / " + title.split('.')[0].split()[0].strip() + " " + title.split('.')[0].split()[1].strip()})
+                         , 'Code': subject + catalog + " / " + subject + " " + catalog
+                         , 'Term': '-'.join(self.classInfo(subject.upper() + catalog))
+                         })
+
+  def classInfo(self, code):
+      query = {'Code': code}
+      # print(code)
+      termAvailable = []
+      for term in self.termMap:
+        termCol = self.db[self.termMap[term]]
+        cursor = termCol.find(query)
+        for m in cursor:
+          termAvailable.append(self.termMap[term])
+          break
+      print(termAvailable)
+      return termAvailable
 
 
   def initAndWriteCSV(self, title, description):

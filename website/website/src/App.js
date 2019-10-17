@@ -7,16 +7,18 @@ class App extends Component {
   state ={
     class: [],
     newSearchModal: false,
-    searchText: "n"
+    searchText: "",
+    term: "classes"
   }
   
   updateSearch(){
-    axios.get('http://localhost:8080/search/classes/' + this.state.searchText).then((response) =>{
+    axios.get('http://localhost:8080/search/' + this.state.term + '/' + this.state.searchText).then((response) =>{
       this.setState({
         class: response.data
       })
     });
     this.toggleNewSearch()
+    console.log(this.state.term)
   }
 
   toggleNewSearch(){
@@ -52,6 +54,18 @@ class App extends Component {
                  });
               }}/>
             </FormGroup>
+            <FormGroup>
+                <Label for="departureTime">Term</Label>
+                <Input type="select"value={this.state.term} onChange = {(e) => {
+                  let {term} = this.state;
+                  term = e.target.value;
+                  this.setState({term});
+                }}>
+                    <option value="classes">Default</option>
+                    <option value="fall2019">Fall 2019</option>
+                    <option vaue="spring2020">Spring 2020</option>
+                </Input>
+               </FormGroup>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.updateSearch.bind(this)}>Search</Button>{' '}

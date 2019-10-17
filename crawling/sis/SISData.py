@@ -29,15 +29,17 @@ class SISData:
     def writeMongo(self,collection, classInfo):
         meetingInfo = self.parseMeeting(classInfo)
 
-        collection.insert_one({'Subject': classInfo.find('Subject').text
-                          , 'Catalog': classInfo.find('CatalogNbr').text
-                          , 'Title:': classInfo.find('CourseTitleLong').text 
-                          , 'Credit:': classInfo.find('UnitsRange').text 
-                          , 'DayTime': meetingInfo['DaysTimes']
+        collection.insert_one({
+                            # 'Subject': classInfo.find('Subject').text
+                        #   , 'Catalog': classInfo.find('CatalogNbr').text
+                        #   , 'Title': classInfo.find('CourseTitleLong').text 
+                        #   , 'Credit': classInfo.find('UnitsRange').text 
+                            'DayTime': meetingInfo['DaysTimes']
                           , 'Instructor': meetingInfo['Instructor']
                           , 'Room': meetingInfo['Room']
-                          , 'Description': meetingInfo['Description']
+                        #   , 'Description': meetingInfo['Description']
                           , 'number': classInfo.attrib['number']
+                          , 'Code': classInfo.find('Subject').text + classInfo.find('CatalogNbr').text
                           })
 
     def parseMeeting(self, classInfo):

@@ -21,6 +21,6 @@ public class SearchController {
     @RequestMapping(value = "{index}/{text}")
     public List<Class> SearchController(@PathVariable String index, @PathVariable String text) throws IOException {
 
-        return SearchApplication.elasticSearchAPI.boolSearch(index, text);
+        return SearchApplication.elasticSearchAPI.queryString(index, text);
     }
 }

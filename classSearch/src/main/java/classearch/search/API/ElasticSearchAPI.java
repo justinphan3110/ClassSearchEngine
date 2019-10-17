@@ -152,6 +152,7 @@ public class ElasticSearchAPI {
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
+        System.out.println(searchResponse.toString());
         return  classExtract(searchResponse.toString());
 
     }
@@ -163,12 +164,14 @@ public class ElasticSearchAPI {
 
         classes.forEach(cl -> {
            JsonObject source = ((JsonObject) cl).getJsonObject("_source");
+           System.out.println(source.toString());
+           System.out.println(source.getString("Subject"));
            result.add(Class.of(
                    source.getString("Subject"),
                    source.getString("Catalog"),
                    source.getString("Title"),
                    source.getString("Description"),
-                   source.getString("Unit"),
+                   source.getString("Credit"),
                    source.toString()
            ));
         });
@@ -180,7 +183,7 @@ public class ElasticSearchAPI {
 
         System.out.println("connected");
 //        List<Class> ans = api.boolSearch(defaultINDEX, "Description", "NAME", 5,5, "stock");
-        List<Class> ans = api.queryString(defaultINDEX, "stock");
+        List<Class> ans = api.queryString("fall2019", "eecs");
         System.out.println(ans);
 
         api.closeConnection();
