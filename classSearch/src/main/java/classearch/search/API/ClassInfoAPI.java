@@ -59,6 +59,6 @@ public class ClassInfoAPI {
 
     public static void main(String[] args) {
         ClassInfoAPI classInfoAPI = ClassInfoAPI.makeConnection("mongodb://localhost:27017", "classCrawling");
-        System.out.println(classInfoAPI.classInfo("Fall 2019", "ACCT101"));
+        System.out.println(classInfoAPI.classInfo("fall2019", "acct101"));
     }
 }

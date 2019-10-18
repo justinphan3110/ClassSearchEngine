@@ -38,10 +38,11 @@ class App extends Component {
           <td>{c.id}</td>
           <td>{c.title}</td>
           <td>{c.description}</td>
-          <MeetingMoreInfo/>
+          <MeetingMoreInfo term='fall2019' code='eecs132'/>
         </tr>
       )
     });
+
     return (
       <div className= "App container">
         <h1>Class Search</h1>
@@ -72,6 +73,7 @@ class App extends Component {
               <th>ID</th>
               <th>TITLE</th>
               <th>Description</th> 
+              <th>Meeting Info</th> 
             </tr>
           </thead>
 
