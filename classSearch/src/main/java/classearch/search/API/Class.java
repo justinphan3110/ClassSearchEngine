@@ -10,7 +10,7 @@ public class Class {
     private final String DESCRIPTION;
     private final String CREDIT;
 
-    private Map<String, List<Meeting>> meetingMap;
+//    private Map<String, List<Meeting>> meetingMap;
 
     public String getSUBJECT() {
         return SUBJECT;
@@ -28,13 +28,13 @@ public class Class {
                 CREDIT.equals(aClass.CREDIT);
     }
 
-    private Class(String subject, String id, String title, String description, String unit, Map<String, List<Meeting>> meetingMap){
+    private Class(String subject, String id, String title, String description, String unit){
         this.SUBJECT = subject;
         this.ID = id;
         this.TITLE = title;
         this.DESCRIPTION = description;
         this.CREDIT = unit;
-        this.meetingMap = meetingMap;
+//        this.meetingMap = meetingMap;
     }
 
     @Override
@@ -48,16 +48,16 @@ public class Class {
                 '}';
     }
 
-    public Map<String, List<Meeting>> getMeetingMap() {
-        return meetingMap;
-    }
+//    public Map<String, List<Meeting>> getMeetingMap() {
+//        return meetingMap;
+//    }
 
-    public static final Class of(String code, String id, String title, String description, String unit, Map<String, List<Meeting>> meetingMap){
+    public static final Class of(String code, String id, String title, String description, String unit){
         Objects.requireNonNull(description, "description can not be null");
         Objects.requireNonNull(title, "title can not be null");
-        Objects.requireNonNull(meetingMap, "meetingMap can not be null");
+//        Objects.requireNonNull(meetingMap, "meetingMap can not be null");
 
-        return new Class(code, id, title, description, unit, meetingMap);
+        return new Class(code, id, title, description, unit);
     }
 
     @Override

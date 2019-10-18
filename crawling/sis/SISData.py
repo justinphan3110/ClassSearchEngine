@@ -33,13 +33,14 @@ class SISData:
                             # 'Subject': classInfo.find('Subject').text
                         #   , 'Catalog': classInfo.find('CatalogNbr').text
                         #   , 'Title': classInfo.find('CourseTitleLong').text 
-                        #   , 'Credit': classInfo.find('UnitsRange').text 
-                            'DayTime': meetingInfo['DaysTimes']
+                           'Credit': classInfo.find('UnitsRange').text 
+                          ,  'DayTime': meetingInfo['DaysTimes']
                           , 'Instructor': meetingInfo['Instructor']
                           , 'Room': meetingInfo['Room']
                         #   , 'Description': meetingInfo['Description']
                           , 'number': classInfo.attrib['number']
                           , 'Code': classInfo.find('Subject').text + classInfo.find('CatalogNbr').text
+                          , 'Component' : classInfo.find('ComponentCode').text
                           })
 
     def parseMeeting(self, classInfo):

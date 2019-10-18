@@ -170,8 +170,7 @@ public class ElasticSearchAPI {
                    source.getString("Catalog"),
                    source.getString("Title"),
                    source.getString("Description"),
-                   source.getString("Credit"),
-                   meetingExtract(source.getJsonArray("Term"))
+                   source.getString("Credit")
            ));
         });
 
@@ -197,8 +196,6 @@ public class ElasticSearchAPI {
                     meeting.getString("DayTime"),
                     meeting.getString("Instructor")
             ));
-
-
         }
 
         return meetingMap;
