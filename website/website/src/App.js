@@ -10,6 +10,9 @@ class App extends Component {
     newSearchModal: false,
     searchText: "",
     term: "classes",
+
+    test1: 'fall2019',
+    test2: 'eecs132'
   }
   
   updateSearch(){
@@ -38,7 +41,7 @@ class App extends Component {
           <td>{c.id}</td>
           <td>{c.title}</td>
           <td>{c.description}</td>
-          <MeetingMoreInfo term='fall2019' code='eecs132'/>
+          <MeetingMoreInfo term={'fall2019'} code={'eecs132'}/>
         </tr>
       )
     });

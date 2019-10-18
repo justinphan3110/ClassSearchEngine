@@ -10,8 +10,8 @@ export default class MeetingMoreInfo extends Component {
         const {term} = this.props;
         const {code} = this.props;
         this.state = {
-            term : term,
-            code : code,
+            term : 'fall2019',
+            code : 'eecs132',
             collapse : false,
 
             meetings: []
@@ -19,15 +19,12 @@ export default class MeetingMoreInfo extends Component {
     }
 
     getClassInfo(){
-        axios.get('http://localhost:8080/class/' + this.state.term + '/' + this.state.code).then((response) => {
+        axios.get('http://localhost:8080/class/' + 'fall2019' + '/' + 'eecs132').then((response) => {
             this.setState({
                 meetings: response.data
             })
         });
 
-        this.toggle()
-    }
-    toggle = () => {
         this.setState({
             collapse : !this.state.collapse
         })
@@ -49,7 +46,7 @@ export default class MeetingMoreInfo extends Component {
 
         return (
             <td>
-           <Button color="info" size="sm" onClick={this.getClassInfo}>More Info</Button>
+           <Button color="info" size="sm" onClick={this.getClassInfo.bind(this)}>More Info</Button>
            <Collapse isOpen={this.state.collapse}>
             <Card>
             <CardBody>
