@@ -1,16 +1,15 @@
 import React, { useState, Component } from 'react';
 import './App.css';
-import { Collapse,Card,CardBody, Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
+import {Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
 import axios from 'axios';
+import MeetingMoreInfo from './components/MoreInfo';
 
 class App extends Component {
   state ={
     class: [],
     newSearchModal: false,
-    moreInfoModal: false,
     searchText: "",
     term: "classes",
-    collapse : true
   }
   
   updateSearch(){
@@ -29,20 +28,6 @@ class App extends Component {
     });
   }
 
-  // toggleMoreInfo(c){
-  //   this.setState({
-  //     moreInfoModal: ! this.state.moreInfoModal
-  //   });
-
-  //   console.log(c.title);
-  // }
-  toggleMoreInfo(){
-    this.setState({
-      collapse : ! this.state.collapse
-    });
-    // console.log(collapse);
-  };
-
   render() {
     let cl = this.state.class.map((c) => {
       // var collapse = true; 
@@ -53,16 +38,7 @@ class App extends Component {
           <td>{c.id}</td>
           <td>{c.title}</td>
           <td>{c.description}</td>
-          <td>
-           <Button color="info" size="sm" onClick={this.toggleMoreInfo.bind(this)}>More Info</Button>
-           <Collapse isOpen={this.state.collapse}>
-            <Card>
-            <CardBody>
-              nooo
-            </CardBody>
-            </Card>
-          </Collapse>
-         </td>
+          <MeetingMoreInfo/>
         </tr>
       )
     });

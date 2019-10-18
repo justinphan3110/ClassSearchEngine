@@ -1,4 +1,6 @@
 package classearch.search.API;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Class {
@@ -8,7 +10,8 @@ public class Class {
     private final String DESCRIPTION;
     private final String CREDIT;
 
-    private final String Json;
+    private Map<String, List<Meeting>> meetingMap;
+
     public String getSUBJECT() {
         return SUBJECT;
     }
@@ -23,6 +26,38 @@ public class Class {
                 TITLE.equals(aClass.TITLE) &&
                 DESCRIPTION.equals(aClass.DESCRIPTION) &&
                 CREDIT.equals(aClass.CREDIT);
+    }
+
+    private Class(String subject, String id, String title, String description, String unit, Map<String, List<Meeting>> meetingMap){
+        this.SUBJECT = subject;
+        this.ID = id;
+        this.TITLE = title;
+        this.DESCRIPTION = description;
+        this.CREDIT = unit;
+        this.meetingMap = meetingMap;
+    }
+
+    @Override
+    public String toString() {
+        return "Class{" +
+                "SUBJECT='" + SUBJECT + '\'' +
+                ", ID='" + ID + '\'' +
+                ", TITLE='" + TITLE + '\'' +
+                ", DESCRIPTION='" + DESCRIPTION + '\'' +
+                ", UNIT='" + CREDIT + '\'' +
+                '}';
+    }
+
+    public Map<String, List<Meeting>> getMeetingMap() {
+        return meetingMap;
+    }
+
+    public static final Class of(String code, String id, String title, String description, String unit, Map<String, List<Meeting>> meetingMap){
+        Objects.requireNonNull(description, "description can not be null");
+        Objects.requireNonNull(title, "title can not be null");
+        Objects.requireNonNull(meetingMap, "meetingMap can not be null");
+
+        return new Class(code, id, title, description, unit, meetingMap);
     }
 
     @Override
@@ -43,39 +78,4 @@ public class Class {
     public String getDESCRIPTION() {
         return DESCRIPTION;
     }
-
-    private Class(String subject, String id, String title, String description, String unit, String json){
-        this.SUBJECT = subject;
-        this.ID = id;
-        this.TITLE = title;
-        this.DESCRIPTION = description;
-        this.CREDIT = unit;
-        this.Json = json;
-    }
-
-    @Override
-    public String toString() {
-        return "Class{" +
-                "SUBJECT='" + SUBJECT + '\'' +
-                ", ID='" + ID + '\'' +
-                ", TITLE='" + TITLE + '\'' +
-                ", DESCRIPTION='" + DESCRIPTION + '\'' +
-                ", UNIT='" + CREDIT + '\'' +
-                ", Json='" + Json + '\'' +
-                '}';
-    }
-
-    public static final Class of(String code, String id, String title, String description, String unit, String json){
-        Objects.requireNonNull(description, "description can not be null");
-        Objects.requireNonNull(title, "title can not be null");
-        Objects.requireNonNull(json, "json can not be null");
-
-        return new Class(code, id, title, description, unit, json);
-    }
-
-
-
-
-
-
 }

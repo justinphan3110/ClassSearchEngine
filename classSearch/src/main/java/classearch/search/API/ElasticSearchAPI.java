@@ -32,10 +32,7 @@ import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ElasticSearchAPI {
     public static final String defaultINDEX = "classes";
@@ -164,23 +161,49 @@ public class ElasticSearchAPI {
 
         classes.forEach(cl -> {
            JsonObject source = ((JsonObject) cl).getJsonObject("_source");
+
            System.out.println(source.toString());
            System.out.println(source.getString("Subject"));
+
            result.add(Class.of(
                    source.getString("Subject"),
                    source.getString("Catalog"),
                    source.getString("Title"),
                    source.getString("Description"),
                    source.getString("Credit"),
-                   source.toString()
+                   meetingExtract(source.getJsonArray("Term"))
            ));
         });
+
         return result;
     }
 
-    private List<Term> meetingExtract(String json){
+    private Map<String, List<Meeting>> meetingExtract(JsonArray termArray){
+        Objects.requireNonNull(termArray, "termArray is null");
 
+        Map<String, List<Meeting>> meetingMap = new HashMap<>();
+
+        for (Object object: termArray){
+            JsonObject meeting = (JsonObject) object;
+
+            meetingMap.putIfAbsent(meeting.getString("Term"), new ArrayList<>());
+
+            meetingMap.get(meeting.getString("Term"))
+                      .add(Meeting.of(
+                    meeting.getString("Term"),
+                    meeting.getString("Code"),
+                    meeting.getString("Room"),
+                    Integer.parseInt(meeting.getString("number")),
+                    meeting.getString("DayTime"),
+                    meeting.getString("Instructor")
+            ));
+
+
+        }
+
+        return meetingMap;
     }
+
 
     public static void main(String[] args) throws IOException {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
