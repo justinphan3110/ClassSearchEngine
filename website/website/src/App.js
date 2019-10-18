@@ -3,7 +3,7 @@ import './App.css';
 import {Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
 import axios from 'axios';
 import MeetingMoreInfo from './components/MoreInfo';
-
+import MoreDescription from './components/MoreDescription';
 class App extends Component {
   state ={
     class: [],
@@ -40,7 +40,8 @@ class App extends Component {
           <td>{(c.subject.toUpperCase())}</td>
           <td>{c.id}</td>
           <td>{c.title}</td>
-          <td>{c.description}</td>
+          {/* <td>{c.description}</td> */}
+          <MoreDescription/>
           <MeetingMoreInfo term={'fall2019'} code={'eecs132'}/>
         </tr>
       )

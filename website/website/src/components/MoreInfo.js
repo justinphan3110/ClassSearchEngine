@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table,Collapse,Card,CardBody, Button } from 'reactstrap';
+import { UncontrolledPopover, PopoverHeader, PopoverBody, ListGroupItem, Table,Collapse,Card,CardBody, Button } from 'reactstrap';
 import axios from 'axios';
 
 export default class MeetingMoreInfo extends Component {
@@ -19,7 +19,7 @@ export default class MeetingMoreInfo extends Component {
     }
 
     getClassInfo(){
-        axios.get('http://localhost:8080/class/' + 'fall2019' + '/' + 'eecs132').then((response) => {
+        axios.get('http://localhost:8080/class/' + 'fall2019' + '/' + 'acct101').then((response) => {
             this.setState({
                 meetings: response.data
             })
@@ -34,39 +34,26 @@ export default class MeetingMoreInfo extends Component {
         let meeting = this.state.meetings.map((c) => {
             
             return (
-                <tr>
-                    <td>{c.number}</td>
-                    <td>{c.dayTime}</td>
-                    <td>{c.room}</td>
-                    <td>{c.instructor}</td>
-                </tr>
+                <div> Class
+                    <ListGroupItem>{c.number}</ListGroupItem>
+                    <ListGroupItem>{c.dayTime}</ListGroupItem>
+                    <ListGroupItem>{c.room}</ListGroupItem>
+                    <ListGroupItem>{c.instructor}</ListGroupItem>
+                </div>
             )
         });
 
 
         return (
             <td>
-           <Button color="info" size="sm" onClick={this.getClassInfo.bind(this)}>More Info</Button>
-           <Collapse isOpen={this.state.collapse}>
-            <Card>
-            <CardBody>
-                <Table>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Time</th>
-                        <th>Location</th>
-                        <th>Instructor</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                        {meeting}
-                    </tbody>
-                </Table>
-            </CardBody>
-            </Card>
-          </Collapse>
+             <Button id="PopoverLegacy" type="button">
+                 Class Info
+            </Button>
+            <UncontrolledPopover trigger="legacy" placement="bottom" target="PopoverLegacy">
+                <PopoverHeader>Legacy Trigger</PopoverHeader>
+                    <PopoverBody>
+                        Legacy is a reactstrap special trigger value (outside of bootstrap's spec/standard). Before reactstrap correctly supported click and focus, it had a hybrid which was very useful and has been brought back as trigger="legacy". One advantage of the legacy trigger is that it allows the popover text to be selected while also closing when clicking outside the triggering element and popover itself.</PopoverBody>
+            </UncontrolledPopover>
          </td>
         )
     }
