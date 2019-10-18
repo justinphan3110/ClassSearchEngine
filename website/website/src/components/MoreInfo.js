@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { UncontrolledPopover, PopoverHeader, PopoverBody, ListGroupItem, Table,Collapse,Card,CardBody, Button } from 'reactstrap';
+import { ListGroup, ListGroupItem, Table,Collapse,Card,CardBody, Button } from 'reactstrap';
 import axios from 'axios';
 
 export default class MeetingMoreInfo extends Component {
@@ -34,7 +34,7 @@ export default class MeetingMoreInfo extends Component {
         let meeting = this.state.meetings.map((c) => {
             
             return (
-                <div> Class
+                <div> 
                     <ListGroupItem>{c.number}</ListGroupItem>
                     <ListGroupItem>{c.dayTime}</ListGroupItem>
                     <ListGroupItem>{c.room}</ListGroupItem>
@@ -46,14 +46,16 @@ export default class MeetingMoreInfo extends Component {
 
         return (
             <td>
-             <Button id="PopoverLegacy" type="button">
-                 Class Info
-            </Button>
-            <UncontrolledPopover trigger="legacy" placement="bottom" target="PopoverLegacy">
-                <PopoverHeader>Legacy Trigger</PopoverHeader>
-                    <PopoverBody>
-                        Legacy is a reactstrap special trigger value (outside of bootstrap's spec/standard). Before reactstrap correctly supported click and focus, it had a hybrid which was very useful and has been brought back as trigger="legacy". One advantage of the legacy trigger is that it allows the popover text to be selected while also closing when clicking outside the triggering element and popover itself.</PopoverBody>
-            </UncontrolledPopover>
+           <Button color="info" size="sm" onClick={this.getClassInfo.bind(this)}>More Info</Button>
+           <Collapse isOpen={this.state.collapse}>
+            <Card size="sm">
+            <CardBody>
+            <ListGroup size="sm">
+                {meeting}
+            </ListGroup>
+            </CardBody>
+            </Card>
+          </Collapse>
          </td>
         )
     }
