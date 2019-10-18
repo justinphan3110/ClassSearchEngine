@@ -53,7 +53,7 @@ class StockSpider(scrapy.Spider):
                          , 'Credit': title.split('.')[2].strip().rsplit(' ', 1)[0].strip()
                          , 'Description': description[1:-1]
                          , 'Code': subject + catalog + " / " + subject + " " + catalog
-                         , 'Term': self.classInfo(subject.upper() + catalog)
+                        #  , 'Term': self.classInfo(subject.upper() + catalog)
                          })
 
   def classInfo(self, code):

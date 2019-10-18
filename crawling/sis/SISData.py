@@ -13,7 +13,7 @@ class SISData:
         root = tree.getroot()
         for term in root.iter('Term'):
             # print(term[0].text)
-            self.classInfo(term, term[0].text)
+            self.classInfo(term, str(term[0].text).replace(" ", "").lower())
 
     def classInfo(self, term, termDescrip):
         self.db[termDescrip].drop()
@@ -39,7 +39,7 @@ class SISData:
                           , 'Room': meetingInfo['Room']
                         #   , 'Description': meetingInfo['Description']
                           , 'number': classInfo.attrib['number']
-                          , 'Code': classInfo.find('Subject').text + classInfo.find('CatalogNbr').text
+                          , 'Code': classInfo.find('Subject').text.lower() + classInfo.find('CatalogNbr').text
                           , 'Component' : classInfo.find('ComponentCode').text
                           })
 
