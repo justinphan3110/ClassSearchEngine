@@ -5,8 +5,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import  com.mongodb.client.model.Filters;
+import io.vertx.core.json.JsonObject;
 import org.bson.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassInfoAPI {
@@ -31,20 +33,32 @@ public class ClassInfoAPI {
         BasicDBObject searchQuery = new BasicDBObject();
         searchQuery.put("Code", code);
 
-        Block<Document> printBlock = new Block<Document>() {
-            @Override
-            public void apply(Document document) {
-                System.out.println(document.toJson());
+        List<Meeting> meetings = new ArrayList<>();
+
+        MongoCursor<Document> cursor = collection.find(Filters.eq("Code", code)).iterator();
+        try{
+            while(cursor.hasNext()) {
+                JsonObject jsonObject = new JsonObject(cursor.next().toJson());
+                if(!jsonObject.getString("Component").equals("REC"))
+                    meetings.add(Meeting.of(
+                            jsonObject.getString("Code"),
+                            jsonObject.getString("Room"),
+                            jsonObject.getString("Component"),
+                            Integer.parseInt(jsonObject.getString("number")),
+                            jsonObject.getString("DayTime"),
+                            jsonObject.getString("Instructor")
+                    ));
+
             }
-        };
+        }finally {
+            cursor.close();
+        }
 
-        collection.find(Filters.eq("Code", code)).forEach(printBlock);
-
-        return null;
+        return meetings;
     }
 
     public static void main(String[] args) {
         ClassInfoAPI classInfoAPI = ClassInfoAPI.makeConnection("mongodb://localhost:27017", "classCrawling");
-        classInfoAPI.classInfo("Fall 2019", "ACCT101");
+        System.out.println(classInfoAPI.classInfo("Fall 2019", "ACCT101"));
     }
 }

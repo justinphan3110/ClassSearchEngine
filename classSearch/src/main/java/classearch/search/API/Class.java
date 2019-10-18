@@ -1,6 +1,4 @@
 package classearch.search.API;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class Class {
@@ -10,7 +8,6 @@ public class Class {
     private final String DESCRIPTION;
     private final String CREDIT;
 
-//    private Map<String, List<Meeting>> meetingMap;
 
     public String getSUBJECT() {
         return SUBJECT;
@@ -34,7 +31,6 @@ public class Class {
         this.TITLE = title;
         this.DESCRIPTION = description;
         this.CREDIT = unit;
-//        this.meetingMap = meetingMap;
     }
 
     @Override
@@ -48,9 +44,6 @@ public class Class {
                 '}';
     }
 
-//    public Map<String, List<Meeting>> getMeetingMap() {
-//        return meetingMap;
-//    }
 
     public static final Class of(String code, String id, String title, String description, String unit){
         Objects.requireNonNull(description, "description can not be null");
