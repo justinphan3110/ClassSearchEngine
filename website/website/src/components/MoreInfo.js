@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ListGroup, ListGroupItem, Table,Collapse,Card,CardBody, Button } from 'reactstrap';
+import { Table,UncontrolledPopover,PopoverHeader,PopoverBody, Button } from 'reactstrap';
 import axios from 'axios';
 
 export default class MeetingMoreInfo extends Component {
@@ -10,8 +10,8 @@ export default class MeetingMoreInfo extends Component {
         const {term} = this.props;
         const {code} = this.props;
         this.state = {
-            term : 'fall2019',
-            code : 'eecs132',
+            term : term,
+            code : code,
             collapse : false,
 
             meetings: []
@@ -19,7 +19,7 @@ export default class MeetingMoreInfo extends Component {
     }
 
     getClassInfo(){
-        axios.get('http://localhost:8080/class/' + 'fall2019' + '/' + 'acct101').then((response) => {
+        axios.get('http://localhost:8080/class/' + this.state.term + '/' + this.state.code).then((response) => {
             this.setState({
                 meetings: response.data
             })
@@ -34,28 +34,36 @@ export default class MeetingMoreInfo extends Component {
         let meeting = this.state.meetings.map((c) => {
             
             return (
-                <div> 
-                    <ListGroupItem>{c.number}</ListGroupItem>
-                    <ListGroupItem>{c.dayTime}</ListGroupItem>
-                    <ListGroupItem>{c.room}</ListGroupItem>
-                    <ListGroupItem>{c.instructor}</ListGroupItem>
-                </div>
+                <tr>
+                    <td>{(c.number)}</td>
+                    <td>{c.dayTime}</td>
+                    <td>{c.room}</td>
+                    <td>{c.instructor}</td>
+                </tr>
             )
         });
 
 
         return (
             <td>
-           <Button color="info" size="sm" onClick={this.getClassInfo.bind(this)}>More Info</Button>
-           <Collapse isOpen={this.state.collapse}>
-            <Card size="sm">
-            <CardBody>
-            <ListGroup size="sm">
-                {meeting}
-            </ListGroup>
-            </CardBody>
-            </Card>
-          </Collapse>
+           <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this)}>More Info</Button>
+           <UncontrolledPopover  placement="bottom" modifiers={{ flip: { behavior: ['bottom'] } }}
+                    trigger="legacy" placement="bottom" target={this.state.code}>
+            <PopoverBody>
+            <Table size="sm">
+            <thead>
+                <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                </tr>
+            </thead>
+
+            <tbody>{meeting}</tbody>
+            </Table>
+            </PopoverBody>
+          </UncontrolledPopover>
          </td>
         )
     }

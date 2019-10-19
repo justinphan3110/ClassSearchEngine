@@ -40,10 +40,8 @@ class App extends Component {
           <td>{(c.subject.toUpperCase())}</td>
           <td>{c.id}</td>
           <td>{c.title}</td>
-          <td>Des</td> 
-          {/* <td>{c.description}</td> */}
-          {/* <MoreDescription/> */}
-          <MeetingMoreInfo term={'fall2019'} code={'eecs132'}/>
+          <MoreDescription description={c.description} code ={(c.subject.toUpperCase()) + c.id}/>
+          <MeetingMoreInfo term={'fall2019'} code={c.subject + c.id}/>
         </tr>
       )
     });
