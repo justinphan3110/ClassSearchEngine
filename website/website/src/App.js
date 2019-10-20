@@ -9,12 +9,13 @@ class App extends Component {
     class: [],
     newSearchModal: false,
     searchText: "",
+    collection: "classes",
     term: "classes",
 
   }
   
   updateSearch(){
-    axios.get('http://localhost:8080/search/' + this.state.term + '/' + this.state.searchText).then((response) =>{
+    axios.get('http://localhost:8080/search/' + this.state.collection + '/' + this.state.searchText).then((response) =>{
       this.setState({
         class: response.data
       })
@@ -39,7 +40,7 @@ class App extends Component {
           <td>{c.id}</td>
           <td>{c.title}</td>
           <MoreDescription description={c.description} code ={(c.subject.toUpperCase()) + c.id}/>
-          <MeetingMoreInfo term={'spring2020'} code={c.subject + c.id}/>
+          <MeetingMoreInfo term={this.state.term} code={c.subject + c.id}/>
         </tr>
       )
     });
@@ -58,6 +59,19 @@ class App extends Component {
                    searchText: e.target.value
                  });
               }}/>
+            </FormGroup>
+
+            <FormGroup>
+              <Label for="exampleSelect">Select</Label>
+              <Input type="select" value={this.state.term} onChange = {(e) => {
+                this.setState({
+                  term: e.target.value
+                })
+              }}>
+                  <option value ="classes">All Terms</option>
+                  <option value ="fall2019">Fall 2019</option>
+                  <option value ="spring2020">Spring 2020</option>
+              </Input>
             </FormGroup>
           </ModalBody>
           <ModalFooter>
