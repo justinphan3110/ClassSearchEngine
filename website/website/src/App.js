@@ -11,8 +11,6 @@ class App extends Component {
     searchText: "",
     term: "classes",
 
-    test1: 'fall2019',
-    test2: 'eecs132'
   }
   
   updateSearch(){
@@ -33,15 +31,15 @@ class App extends Component {
 
   render() {
     let cl = this.state.class.map((c) => {
-      // var collapse = true; 
-
+      // var colla pse = true; 
+      // console.log(description)
       return (
-        <tr>
+        <tr key={(c.subject.toUpperCase()) + c.id}>
           <td>{(c.subject.toUpperCase())}</td>
           <td>{c.id}</td>
           <td>{c.title}</td>
           <MoreDescription description={c.description} code ={(c.subject.toUpperCase()) + c.id}/>
-          <MeetingMoreInfo term={'fall2019'} code={c.subject + c.id}/>
+          <MeetingMoreInfo term={'spring2020'} code={c.subject + c.id}/>
         </tr>
       )
     });

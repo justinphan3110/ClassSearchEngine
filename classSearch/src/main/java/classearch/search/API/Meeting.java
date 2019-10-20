@@ -22,6 +22,10 @@ public class Meeting implements Comparable<Meeting>{
         return number;
     }
 
+    public String getComponent() {
+        return component;
+    }
+
     public String getDayTime() {
         return dayTime;
     }

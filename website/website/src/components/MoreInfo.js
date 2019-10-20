@@ -16,10 +16,12 @@ export default class MeetingMoreInfo extends Component {
 
             meetings: []
         };
+        // console.log(code);
     }
 
-    getClassInfo(){
-        axios.get('http://localhost:8080/class/' + this.state.term + '/' + this.state.code).then((response) => {
+
+    getClassInfo(term, code){
+        axios.get('http://localhost:8080/class/' + term + '/' + code).then((response) => {
             this.setState({
                 meetings: response.data
             })
@@ -28,6 +30,16 @@ export default class MeetingMoreInfo extends Component {
         this.setState({
             collapse : !this.state.collapse
         })
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.code !== prevProps.code
+             || this.props.term !== prevProps.term) {
+            this.setState({
+                code: this.props.code,
+                term: this.props.term
+            });
+        }
     }
 
     render() {
@@ -39,6 +51,7 @@ export default class MeetingMoreInfo extends Component {
                     <td>{c.dayTime}</td>
                     <td>{c.room}</td>
                     <td>{c.instructor}</td>
+                    <td>{c.component}</td>
                 </tr>
             )
         });
@@ -46,17 +59,18 @@ export default class MeetingMoreInfo extends Component {
 
         return (
             <td>
-           <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this)}>More Info</Button>
+           <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this, this.state.term, this.state.code)}>More Info</Button>
            <UncontrolledPopover  placement="bottom" modifiers={{ flip: { behavior: ['bottom'] } }}
                     trigger="legacy" placement="bottom" target={this.state.code}>
             <PopoverBody>
             <Table size="sm">
-            <thead>
+            <thead key={this.state.code}>
                 <tr>
                 <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
+                <th>Time</th>
+                <th>Room</th>
+                <th>Instructor</th>
+                <th>Component</th>
                 </tr>
             </thead>
 

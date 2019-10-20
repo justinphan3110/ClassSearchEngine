@@ -9,17 +9,32 @@ export default class MoreDescription extends Component {
         const {description} = this.props;
         const {code} = this.props;
         this.state = {
-            description : description,
-            code: code,
+            description,
+            code,
             popoverOpen: true
         };
     }
 
+    componentDidMount(){
+        this.state = {
+            description : " "
+        }
+    }
+    
     toggle(){
         this.setState({
             popoverOpen: !this.state.popoverOpen
         });
         console.log(this.state.description)
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.description !== prevProps.description) {
+            this.setState({
+                description: this.props.description,
+                code: this.props.code
+            });
+        }
     }
 
     render() {
@@ -34,6 +49,7 @@ export default class MoreDescription extends Component {
                     <PopoverBody>
                         {this.state.description} </PopoverBody>
               </UncontrolledPopover>
+              {/* {this.state.description} */}
             </td>
         )
     }
