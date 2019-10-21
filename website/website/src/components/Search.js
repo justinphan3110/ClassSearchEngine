@@ -1,34 +1,51 @@
 import React, {Component } from 'react';
 import {Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
 import axios from 'axios';
-import MeetingMoreInfo from './MoreInfo';
+import MeetingMoreInfo from './MeetingMoreInfo';
 import MoreDescription from './MoreDescription';
 
 
 class Search extends Component {
-  state ={
-    class: [],
-    newSearchModal: false,
-    searchText: "",
-    collection: "classes",
-    term: "fall2019",
 
+  //constructor
+  constructor (props){
+    super(props);
+    const {searchQuery} = this.props;
+    this.state ={
+      class: [],
+      newSearchModal: false,
+      searchQuery,
+      collection: "classes",
+      term: "fall2019",
+
+      hosting: "172.20.84.245"
+    }
+   
   }
   
   updateSearch(){
-    axios.get('http://localhost:8080/search/' + this.state.collection + '/' + this.state.searchText).then((response) =>{
+    axios.get('http://' + this.state.hosting + ':8080/search/' + this.state.collection + '/' + this.state.searchQuery).then((response) =>{
       this.setState({
         class: response.data
       })
     });
     this.toggleNewSearch()
-    console.log(this.state.term)
+    // console.log(this.state.term)
   }
 
   toggleNewSearch(){
     this.setState({
       newSearchModal: ! this.state.newSearchModal
     });
+  }
+
+  componentDidMount(){
+    if(this.state.searchQuery !== undefined){
+      console.log("searching: " + this.state.searchQuery);
+      this.updateSearch()
+      this.toggleNewSearch()
+    }
+
   }
 
   render() {
@@ -55,9 +72,9 @@ class Search extends Component {
           <ModalBody>
             <FormGroup>
                <Label for="search">Search</Label>
-               <Input id="search" value ={this.state.searchText} onChange={(e) => {
+               <Input id="search" value ={this.state.searchQuery} onChange={(e) => {
                  this.setState({
-                   searchText: e.target.value
+                   searchQuery: e.target.value
                  });
               }}/>
             </FormGroup>

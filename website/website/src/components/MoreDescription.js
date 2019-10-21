@@ -25,7 +25,7 @@ export default class MoreDescription extends Component {
         this.setState({
             popoverOpen: !this.state.popoverOpen
         });
-        console.log(this.state.description)
+        // console.log(this.state.description)
     }
 
     componentDidUpdate(prevProps) {

@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
+import { Redirect, withRouter } from 'react-router-dom';
 import { Table,UncontrolledPopover,Row, Col, PopoverBody, Button } from 'reactstrap';
 import axios from 'axios';
 
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-import Class from '../Route/Class';
 
 
-export default class MeetingMoreInfo extends Component {
+class MeetingMoreInfo extends Component {
 
     //Constructor
     constructor (props) {
@@ -22,14 +16,18 @@ export default class MeetingMoreInfo extends Component {
             term : term,
             code : code,
             collapse : false,
+            routeToClassInfo :false,
+            meetings: [],
 
-            meetings: []
+            hosting: "172.20.84.245"
         };
+
+        this.routeToClassPage = this.routeToClassPage.bind(this);
     }
 
 
-    getClassInfo(term, code){
-        axios.get('http://localhost:8080/class/' + term + '/' + code).then((response) => {
+    getClassInfo(){
+        axios.get('http://' + this.state.hosting + ':8080/class/' + this.state.term + '/' + this.state.code).then((response) => {
             this.setState({
                 meetings: response.data
             })
@@ -51,14 +49,18 @@ export default class MeetingMoreInfo extends Component {
     }
 
     routeToClassPage(){
-        
+        this.setState({
+            routeToClassInfo : ! this.state.routeToClassInfo
+        });
+        // this.props.history.push('/class/' + this.state.code);
     }
+
 
     render() {
         let meeting = this.state.meetings.map((c) => {
             
             return (
-                <tr key={this.state.code}>
+                <tr key={this.state.code + c.number}>
                     <td>{(c.number)}</td>
                     <td>{c.dayTime}</td>
                     <td>{c.room}</td>
@@ -67,18 +69,21 @@ export default class MeetingMoreInfo extends Component {
                 </tr>
             )
         });
-
+        
+        if(this.state.routeToClassInfo === true){
+            return <Redirect push to={'/class/' + this.state.code} />
+        }
 
         return (
             <td>
             <Row>
             <Col>
-           <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this, this.state.term, this.state.code)}>Meeting Info</Button>
+           <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this)}>Meeting Info</Button>
            <UncontrolledPopover  placement="bottom"  
                     trigger="legacy" flip={false} modifiers={{preventOverflow: {boundariesElement: "viewport"}}} target={this.state.code}>
             <PopoverBody>
             <Table size="sm" >
-            <thead key={this.state.code}>
+            <thead key={this.state.code + "header"}>
                 <tr>
                 <th>#</th>
                 <th>Time</th>
@@ -93,9 +98,11 @@ export default class MeetingMoreInfo extends Component {
             </PopoverBody>
             </UncontrolledPopover>
             </Col>
-            <Col><Button size="sm" color="primary" onClick={this.routeToClassPage.bind(this)}>Comment and Rating</Button></Col>
+            <Col><Button size="sm" color="primary" onClick={this.routeToClassPage}>Comment and Rating</Button></Col>
           </Row>
          </td>
         )
     }
 }
+
+export default withRouter(MeetingMoreInfo)

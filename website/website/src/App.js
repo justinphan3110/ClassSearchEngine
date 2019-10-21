@@ -2,8 +2,8 @@ import React, { useState, Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import Search from './components/Search';
-import {BrowserRouter as Router} from 'react-router-dom';
-import Route from 'react-router-dom/Route';
+import Class from './components/Class';
+import {Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 
 class App extends Component {
   state ={
@@ -15,22 +15,20 @@ class App extends Component {
 
   }
   
-
+  
   render() {
     return(
-      <Router>
-        <div className="App Router">
-          <Route path="/" exact strict render={
-            () => {
-              return (<Search/>)
-            }
-          }/>
-
-          <Route path="/class" exact strict render={
-            () => {
-              return (<div>Hello</div>)
-            }
-          }/>
+      <Router >
+        <div className="App Router" >
+          <Switch>
+          <Route path="/" exact strict component={Search}/>
+          <Route path="/search/:searchQuery" exact strict render={({match}) => (
+            <Search searchQuery={match.params.searchQuery}/>   
+          )}/>
+          <Route path="/class/:code" exact strict render={({match}) => (
+            <Class code={match.params.code}/>   
+          )}/>
+          </Switch>
         </div>
       </Router>
     );
