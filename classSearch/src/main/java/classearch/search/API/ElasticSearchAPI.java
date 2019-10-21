@@ -133,11 +133,14 @@ public class ElasticSearchAPI {
         for(String filed: fields)
             qb.should(new MatchPhraseQueryBuilder(filed, text).slop(defaultSLOP));
 
-        searchSourceBuilder.query(qb);
+        searchSourceBuilder.query(qb).size(50);
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
-        return classExtract(searchResponse.toString());
+        List<Class> classList = classExtract(searchResponse.toString());
+        Collections.sort(classList);
+
+        return classList;
     }
 
     public List<Class> queryString(String index, String text) throws IOException {

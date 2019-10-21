@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
-import { Table,UncontrolledPopover,PopoverHeader,PopoverBody, Button } from 'reactstrap';
+import { Table,UncontrolledPopover,Row, Col, PopoverBody, Button } from 'reactstrap';
 import axios from 'axios';
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
+import Class from '../Route/Class';
+
 
 export default class MeetingMoreInfo extends Component {
 
@@ -16,7 +25,6 @@ export default class MeetingMoreInfo extends Component {
 
             meetings: []
         };
-        // console.log(code);
     }
 
 
@@ -42,11 +50,15 @@ export default class MeetingMoreInfo extends Component {
         }
     }
 
+    routeToClassPage(){
+        
+    }
+
     render() {
         let meeting = this.state.meetings.map((c) => {
             
             return (
-                <tr>
+                <tr key={this.state.code}>
                     <td>{(c.number)}</td>
                     <td>{c.dayTime}</td>
                     <td>{c.room}</td>
@@ -59,11 +71,13 @@ export default class MeetingMoreInfo extends Component {
 
         return (
             <td>
-           <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this, this.state.term, this.state.code)}>More Info</Button>
-           <UncontrolledPopover  placement="bottom" modifiers={{ flip: { behavior: ['bottom'] } }}
-                    trigger="legacy" placement="bottom" target={this.state.code}>
+            <Row>
+            <Col>
+           <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this, this.state.term, this.state.code)}>Meeting Info</Button>
+           <UncontrolledPopover  placement="bottom"  
+                    trigger="legacy" flip={false} modifiers={{preventOverflow: {boundariesElement: "viewport"}}} target={this.state.code}>
             <PopoverBody>
-            <Table size="sm">
+            <Table size="sm" >
             <thead key={this.state.code}>
                 <tr>
                 <th>#</th>
@@ -77,7 +91,10 @@ export default class MeetingMoreInfo extends Component {
             <tbody>{meeting}</tbody>
             </Table>
             </PopoverBody>
-          </UncontrolledPopover>
+            </UncontrolledPopover>
+            </Col>
+            <Col><Button size="sm" color="primary" onClick={this.routeToClassPage.bind(this)}>Comment and Rating</Button></Col>
+          </Row>
          </td>
         )
     }

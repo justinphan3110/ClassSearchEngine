@@ -30,14 +30,14 @@ class SISData:
         meetingInfo = self.parseMeeting(classInfo)
 
         collection.insert_one({
-                            # 'Subject': classInfo.find('Subject').text
-                        #   , 'Catalog': classInfo.find('CatalogNbr').text
-                        #   , 'Title': classInfo.find('CourseTitleLong').text 
-                           'Credit': classInfo.find('UnitsRange').text 
+                            'Subject': classInfo.find('Subject').text
+                          , 'Catalog': classInfo.find('CatalogNbr').text
+                          , 'Title': classInfo.find('CourseTitleLong').text 
+                          , 'Credit': classInfo.find('UnitsRange').text 
                           ,  'DayTime': meetingInfo['DaysTimes']
                           , 'Instructor': meetingInfo['Instructor']
                           , 'Room': meetingInfo['Room']
-                        #   , 'Description': meetingInfo['Description']
+                          , 'Description': meetingInfo['Description']
                           , 'number': classInfo.attrib['number']
                           , 'Code': classInfo.find('Subject').text.lower() + classInfo.find('CatalogNbr').text
                           , 'Component' : classInfo.find('ComponentCode').text

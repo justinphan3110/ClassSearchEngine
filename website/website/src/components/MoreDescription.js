@@ -40,7 +40,7 @@ export default class MoreDescription extends Component {
     render() {
         return (
             <td>
-              <Button id={this.state.code} type="button">
+              <Button id={this.state.code} type="button" size="sm">
                 Class Description
               </Button>
               <UncontrolledPopover  placement="bottom" modifiers={{ flip: { behavior: ['bottom'] } }}
