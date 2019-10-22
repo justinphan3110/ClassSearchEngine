@@ -3,6 +3,8 @@ import {Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Tab
 import axios from 'axios';
 import MeetingMoreInfo from './MeetingMoreInfo';
 import MoreDescription from './MoreDescription';
+import { Redirect, withRouter } from 'react-router-dom';
+
 
 
 class Search extends Component {
@@ -18,8 +20,12 @@ class Search extends Component {
       collection: "classes",
       term: "fall2019",
 
+      routeToSearch: false,
+
       hosting: "172.20.84.245"
     }
+
+    console.log("searchQuery in constructor: " + this.state.searchQuery);
    
   }
   
@@ -33,6 +39,16 @@ class Search extends Component {
     // console.log(this.state.term)
   }
 
+  componentWillMount(){
+    console.log("in componnet will mount")
+  }
+
+  routeToSearchPage(){
+    this.setState({
+      routeToSearch : ! this.state.routeToSearch
+    });
+  }
+
   toggleNewSearch(){
     this.setState({
       newSearchModal: ! this.state.newSearchModal
@@ -40,12 +56,15 @@ class Search extends Component {
   }
 
   componentDidMount(){
+    console.log(this.state.searchQuery)
     if(this.state.searchQuery !== undefined){
       console.log("searching: " + this.state.searchQuery);
-      this.updateSearch()
-      this.toggleNewSearch()
+      axios.get('http://' + this.state.hosting + ':8080/search/' + this.state.collection + '/' + this.state.searchQuery).then((response) =>{
+        this.setState({
+          class: response.data
+        })
+      });
     }
-
   }
 
   render() {
@@ -62,6 +81,10 @@ class Search extends Component {
         </tr>
       )
     });
+
+    if(this.state.routeToSearch === true){
+      return <Redirect push to={'/search/' + this.state.searchQuery} />
+    }
 
     return (
       <div className= "Search">
@@ -119,4 +142,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default withRouter(Search);
