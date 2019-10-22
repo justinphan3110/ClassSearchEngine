@@ -39,9 +39,6 @@ class Search extends Component {
     // console.log(this.state.term)
   }
 
-  componentWillMount(){
-    console.log("in componnet will mount")
-  }
 
   routeToSearchPage(){
     this.setState({
@@ -104,7 +101,7 @@ class Search extends Component {
 
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.updateSearch.bind(this)}>Search</Button>{' '}
+            <Button color="primary" onClick={this.routeToSearchPage.bind(this)}>Search</Button>{' '}
             <Button color="secondary" onClick={this.toggleNewSearch.bind(this)}>Cancel</Button>
           </ModalFooter>
         </Modal>   

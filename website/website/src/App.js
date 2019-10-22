@@ -21,9 +21,9 @@ class App extends Component {
       <Router >
         <div className="App Router" >
           <Switch>
-          <Route path="/" exact strict component={Search}/>
-          <Route path="/search/:searchQuery" exact strict render={({match}) => (
-            <Search searchQuery={match.params.searchQuery}/>   
+          <Route key="home" path="/" exact strict component={Search}/>
+          <Route  path="/search/:searchQuery" exact strict render={({match}) => (
+            <Search key={"searchPage" + match.params.searchQuery} searchQuery={match.params.searchQuery}/>   
           )}/>
           <Route path="/class/:code" exact strict render={({match}) => (
             <Class code={match.params.code}/>   
