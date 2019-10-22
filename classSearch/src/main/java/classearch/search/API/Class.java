@@ -1,17 +1,14 @@
 package classearch.search.API;
+import java.util.Comparator;
 import java.util.Objects;
 
-public class Class {
+public class Class implements Comparable<Class>{
     private final String SUBJECT;
     private final String ID;
     private final String TITLE;
     private final String DESCRIPTION;
     private final String CREDIT;
 
-
-    public String getSUBJECT() {
-        return SUBJECT;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -58,6 +55,10 @@ public class Class {
         return Objects.hash(SUBJECT, ID, TITLE, DESCRIPTION, CREDIT);
     }
 
+    public String getSUBJECT() {
+        return SUBJECT;
+    }
+
     public String getID() {
         return ID;
     }
@@ -70,5 +71,14 @@ public class Class {
 
     public String getDESCRIPTION() {
         return DESCRIPTION;
+    }
+
+    @Override
+    public int compareTo(Class c) {
+        return Comparator.comparing(Class::getSUBJECT)
+                        .thenComparing(Class::getID)
+                        .thenComparing(Class::getTITLE)
+                        .compare(this, c);
+                         
     }
 }

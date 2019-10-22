@@ -1,18 +1,55 @@
 import React, { Component } from 'react'
-import {UncontrolledPopover, PopoverHeader, PopoverBody, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
+import {UncontrolledPopover, PopoverHeader, PopoverBody, Button } from 'reactstrap';
 
 export default class MoreDescription extends Component {
+
+    //Constructor
+    constructor (props){
+        super(props);
+        const {description} = this.props;
+        const {code} = this.props;
+        this.state = {
+            description,
+            code,
+            popoverOpen: true
+        };
+    }
+
+    componentDidMount(){
+        this.state = {
+            description : " "
+        }
+    }
+    
+    toggle(){
+        this.setState({
+            popoverOpen: !this.state.popoverOpen
+        });
+        // console.log(this.state.description)
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.description !== prevProps.description) {
+            this.setState({
+                description: this.props.description,
+                code: this.props.code
+            });
+        }
+    }
+
     render() {
         return (
             <td>
-            <Button id="PopoverLegacy" type="button">
-                 More Description
-            </Button>
-            <UncontrolledPopover trigger="legacy" placement="bottom" target="PopoverLegacy">
-                <PopoverHeader>Legacy Trigger</PopoverHeader>
+              <Button id={this.state.code} type="button" size="sm">
+                Class Description
+              </Button>
+              <UncontrolledPopover  placement="bottom" modifiers={{ flip: { behavior: ['bottom'] } }}
+                    trigger="legacy" placement="bottom" target={this.state.code}>
+                <PopoverHeader>{this.state.code}</PopoverHeader>
                     <PopoverBody>
-                        Legacy is a reactstrap special trigger value (outside of bootstrap's spec/standard). Before reactstrap correctly supported click and focus, it had a hybrid which was very useful and has been brought back as trigger="legacy". One advantage of the legacy trigger is that it allows the popover text to be selected while also closing when clicking outside the triggering element and popover itself.</PopoverBody>
-            </UncontrolledPopover>
+                        {this.state.description} </PopoverBody>
+              </UncontrolledPopover>
+              {/* {this.state.description} */}
             </td>
         )
     }

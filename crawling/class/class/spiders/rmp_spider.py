@@ -1,5 +1,6 @@
 import json
 import math
+import requests
 
 class RateMyProfScraper:
         def __init__(self,schoolid):
