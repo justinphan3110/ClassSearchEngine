@@ -8,7 +8,10 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Objects;
 
 @SpringBootApplication
@@ -17,9 +20,20 @@ public class SearchApplication {
     private static final String mongoDB = "classCrawling";
 
 
-    public final static ElasticSearchAPI elasticSearchAPI = ElasticSearchAPI.makeConnection();
-    public final static ClassInfoAPI classInfoAPI = ClassInfoAPI.makeConnection(mongoURI, mongoDB);
+    public static ElasticSearchAPI elasticSearchAPI = ElasticSearchAPI.makeConnection();
+    public static ClassInfoAPI classInfoAPI = ClassInfoAPI.makeConnection(mongoURI, mongoDB);
 
+//    @PostConstruct
+//    public void init(){
+//        elasticSearchAPI = ;
+//        classInfoAPI = ;
+//    }
+
+    @PreDestroy
+    public void exit(){
+        elasticSearchAPI.closeConnection();
+        classInfoAPI.closeConnection();
+    }
 
     public static void main(String[] args) {
 

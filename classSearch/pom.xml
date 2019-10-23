@@ -74,6 +74,8 @@
         <elasticsearch.version>7.3.2</elasticsearch.version>
         <mongodbDriver.version>3.11.1</mongodbDriver.version>
     </properties>
+
+
     <build>
         <plugins>
             <plugin>

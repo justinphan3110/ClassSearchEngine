@@ -14,17 +14,23 @@ import java.util.List;
 public class ClassInfoAPI {
 
     private final MongoDatabase database;
+    private final MongoClient mongoClient;
 
-    private ClassInfoAPI(MongoDatabase database){
+    private ClassInfoAPI(MongoDatabase database, MongoClient mongoClient){
         this.database = database;
-
+        this.mongoClient = mongoClient;
     }
 
     public static final ClassInfoAPI makeConnection(String URI, String DATABASE){
         MongoClient mongoClient = new MongoClient(new MongoClientURI(URI));
         MongoDatabase db = mongoClient.getDatabase(DATABASE);
 
-        return new ClassInfoAPI(db);
+        return new ClassInfoAPI(db, mongoClient);
+    }
+
+    public final void closeConnection(){
+        System.out.println("closing mongoClient");
+        mongoClient.close();
     }
 
     public List<Meeting> classInfo(String collectionName, String code){
