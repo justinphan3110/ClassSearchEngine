@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom';
-import { Table,UncontrolledPopover,Row, Col, PopoverBody, Button } from 'reactstrap';
+import { Container, Table,UncontrolledPopover,Row, Col, PopoverBody, Button } from 'reactstrap';
 import axios from 'axios';
 
 
@@ -19,7 +19,7 @@ class MeetingMoreInfo extends Component {
             routeToClassInfo :false,
             meetings: [],
 
-            hosting: "172.20.84.245"
+            hosting: "localhost"
         };
 
         this.routeToClassPage = this.routeToClassPage.bind(this);
@@ -76,6 +76,7 @@ class MeetingMoreInfo extends Component {
 
         return (
             <td>
+            <Container>
             <Row>
             <Col>
            <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this)}>Meeting Info</Button>
@@ -100,6 +101,7 @@ class MeetingMoreInfo extends Component {
             </Col>
             <Col><Button size="sm" color="primary" onClick={this.routeToClassPage}>Comment and Rating</Button></Col>
           </Row>
+          </Container>
          </td>
         )
     }

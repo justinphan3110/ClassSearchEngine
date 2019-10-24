@@ -4,6 +4,7 @@ import axios from 'axios';
 import MeetingMoreInfo from './MeetingMoreInfo';
 import MoreDescription from './MoreDescription';
 import { Redirect, withRouter } from 'react-router-dom';
+import HelpDesk from './HelpImproveSearch';
 
 
 
@@ -22,7 +23,7 @@ class Search extends Component {
 
       routeToSearch: false,
 
-      hosting: "172.20.84.245"
+      hosting: "localhost"
     }
 
     console.log("searchQuery in constructor: " + this.state.searchQuery);
@@ -115,8 +116,7 @@ class Search extends Component {
               <th>TITLE</th>
               <th>Description</th> 
               <th>
-                <FormGroup>
-                  <Input type="select" value={this.state.term} onChange = {(e) => {
+                  <Input size ="sm" type="select" value={this.state.term} onChange = {(e) => {
                     this.setState({
                       term: e.target.value
                      })
@@ -124,9 +124,7 @@ class Search extends Component {
                   <option value ="fall2019">Fall 2019</option>
                   <option value ="spring2020">Spring 2020</option>
               </Input>
-            </FormGroup>
             </th>
-            {/* <th></th>  */}
             </tr>
           </thead>
 
@@ -134,6 +132,8 @@ class Search extends Component {
             {cl}
           </tbody>
         </Table>
+
+        <HelpDesk/>
       </div>
     );
   }
