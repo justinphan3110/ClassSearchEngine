@@ -17,8 +17,6 @@ services:
     ports:
       - "9200:9200"
   
-  mongo:
-     image: mongo
 
 volumes:
   esdata:
