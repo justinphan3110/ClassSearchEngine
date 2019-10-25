@@ -1,8 +1,7 @@
 import React from 'react'
 import {Form, FormGroup, Input, Label, glyphicon, Button} from 'reactstrap'
 import './Class.css'
-
-var Rating = require('react-rating')
+import axios from 'axios'
 
 const ListTag = [{id: 1, value: "gives good feedback"}, {id: 2, value: "respected"},
   {id: 3, value: "lots of homework"}, {id: 4, value: "accessible outside class"}, 
@@ -25,7 +24,7 @@ export default class Class extends React.Component {
       instructor: '',
       ListTag: [...ListTag.map(tag => {return {...tag, selected: false }})],
       term: '',
-      color: {true: 'lightblue', false: 'lightgray'},
+      color: {true: 'steelblue', false: 'lightgray'},
       rate: 0,
       comment: ''
     };
@@ -38,8 +37,6 @@ export default class Class extends React.Component {
     term = e.target.value;
     this.setState({term});
   }
-  
-
   
 
   handleInstructorChange = (e) => {
@@ -57,25 +54,11 @@ export default class Class extends React.Component {
 
   renderTag = (tag, idx) => {
     return <code style={{background: this.state.color[this.state.ListTag[idx].selected], 
-    cursor: 'pointer'}} onClick={() => this.toggleSelectTag(idx)}>
+    cursor: 'pointer', color: 'crimson'}} onClick={() => this.toggleSelectTag(idx)}>
       {tag.value}
       </code>
   }
- /*
-  var rating = 0;
-  return <Rating
-  stop ='5'
-  initialRating='0'
-  step='1'
-  emptySymbol={['fa fa-star-o fa-2x', 'fa fa-star-o fa-2x',
-  'fa fa-star-o fa-2x', 'fa fa-star-o fa-2x',
-  'fa fa-star-o fa-2x']}
-  fullSymbol={['fa fa-star fa-2x', 'fa fa-star fa-2x',
-  'fa fa-star fa-2x', 'fa fa-star fa-2x',
-  'fa fa-star fa-2x']}
-  onChange={(rate) => {rating = rate}}
-  />
-  */
+ 
 
   toggleStar5() {
     this.setState({rate: 5});
@@ -114,10 +97,6 @@ export default class Class extends React.Component {
     this.setState({comment});
   } 
 
-  handleRateChange = (rate) => {
-    this.setState({rate: rate});
-  }
-
   handleSubmit = (e) => {
     let ListTag = this.state.ListTag;
     var tags = [];
@@ -125,15 +104,27 @@ export default class Class extends React.Component {
       if (ListTag[i].selected)
         tags.push(ListTag[i].value);  
     };
-    console.log(this.state.term);
-    console.log(this.state.instructor);
-    console.log(this.state.comment);
-    console.log(this.state.rate);
-    console.log(tags);
+    let url = "http://localhost:8080/rating/" + this.state.code + "/rate"
+    const rating = {
+      code: this.state.code,
+      instructor: {
+        name: this.state.instructor,
+        term: this.state.term,
+        tags: tags,
+        comment: this.state.comment,
+        rate: this.state.rate
+      }
+    };
+    
+    axios.post(url, rating).then(res => {
+      console.log(res);
+      console.log(res.data);
+    });
+    
+    console.log(rating);
+    console.log(url);
   }
-  /*
  
-*/
  
   render() {
     //console.log("in class")
