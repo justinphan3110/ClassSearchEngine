@@ -10,7 +10,7 @@
   },
   "Description": {
     "type": "text"
-  },
+  },    
   "Subject": {
     "type": "keyword"
   },
