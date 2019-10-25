@@ -4,7 +4,7 @@ from pymongo import MongoClient
 class SISData:
     # db = None
     def __init__(self):
-        connection = MongoClient('localhost', 27017)
+        connection = MongoClient('0.0.0.0', 27017)
         # connection = MongoClient('localhost', 27017)
         self.db = connection['classCrawling']
 
@@ -81,6 +81,7 @@ class SISData:
         return table
 
 cleaner = SISData()
+# cleaner.reading('/home/long/github/ClassSearchEngine/lib/soc.xml')
 cleaner.reading('/home/lnp26/github/ClassSearchEngine/lib/soc.xml')
 
 
