@@ -14,6 +14,7 @@ class Search extends Component {
   constructor (props){
     super(props);
     const {searchQuery} = this.props;
+
     this.state ={
       class: [],
       newSearchModal: false,
@@ -23,7 +24,8 @@ class Search extends Component {
 
       routeToSearch: false,
 
-      hosting: "localhost"
+      // hosting: 'localhost'
+      hosting: '34.69.198.55'
     }
 
     console.log("searchQuery in constructor: " + this.state.searchQuery);

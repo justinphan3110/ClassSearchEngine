@@ -26,7 +26,10 @@ export default class Class extends React.Component {
       term: '',
       color: {true: 'steelblue', false: 'lightgray'},
       rate: 0,
-      comment: ''
+      comment: '',
+
+      // hosting: 'localhost'
+      hosting: '34.69.198.55'
     };
 
     //console.log(code)
@@ -104,7 +107,7 @@ export default class Class extends React.Component {
       if (ListTag[i].selected)
         tags.push(ListTag[i].value);  
     };
-    let url = "http://localhost:8080/rating/" + this.state.code + "/rate"
+    let url = "http://" + this.state.hosting + ":8080/rating/" + this.state.code + "/rate"
     const rating = {
       code: this.state.code,
       instructor: {
