@@ -38,7 +38,7 @@ public class ElasticSearchAPI {
     public static final String defaultINDEX = "classes";
 
     // localHost credentials
-    private static final String HOST = "localhost";
+    private static final String HOST = "34.69.198.55";
     private static final int PORT_ONE = 9200;
     private static final String SCHEME = "http";
 

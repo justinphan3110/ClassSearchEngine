@@ -80,7 +80,7 @@ class SISData:
         return table
 
 cleaner = SISData()
-cleaner.reading('/home/long/github/ClassSearchEngine/lib/soc.xml')
+cleaner.reading('/home/lnp26/github/ClassSearchEngine/libsoc.xml')
 
 
 
