@@ -24,8 +24,8 @@ class Search extends Component {
 
       routeToSearch: false,
 
-      // hosting: 'localhost'
-      hosting: '34.69.198.55'
+      hosting: 'localhost'
+      // hosting: '34.69.198.55'
     }
 
     console.log("searchQuery in constructor: " + this.state.searchQuery);
