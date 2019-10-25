@@ -4,7 +4,7 @@ from pymongo import MongoClient
 class SISData:
     # db = None
     def __init__(self):
-        connection = MongoClient('34.69.198.55', 27017)
+        connection = MongoClient('localhost', 27017)
         # connection = MongoClient('localhost', 27017)
         self.db = connection['classCrawling']
 
