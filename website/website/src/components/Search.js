@@ -14,19 +14,17 @@ class Search extends Component {
   constructor(props) {
     super(props);
     const { searchQuery } = this.props;
-
     this.state = {
       class: [],
       newSearchModal: false,
       searchQuery,
       collection: "classes",
-      defaultTerm: "spring2020",
-      term: "spring2020",
+      term: "default",
 
       routeToSearch: false,
 
-      // hosting: 'localhost'
-      hosting: '34.69.198.55'
+      hosting: 'localhost'
+      // hosting: '34.69.198.55'
     }
 
     console.log("searchQuery in constructor: " + this.state.searchQuery);
@@ -34,14 +32,13 @@ class Search extends Component {
   }
 
   updateSearch() {
-    axios.get('http://' + this.state.hosting + ':8080/search/' 
-                + this.state.collection + '/' 
-                + this.state.defaultTerm +  '/' 
-                + this.state.searchQuery).then((response) => {
-      this.setState({
-        class: response.data
-      })
-    });
+    axios.get('http://' + this.state.hosting + ':8080/search/'
+      + this.state.collection + '/'
+      + this.state.searchQuery).then((response) => {
+        this.setState({
+          class: response.data
+        })
+      });
     this.toggleNewSearch()
     console.log(this.state.defaultTerm)
   }
@@ -63,30 +60,39 @@ class Search extends Component {
     console.log(this.state.searchQuery)
     if (this.state.searchQuery !== undefined) {
       console.log("searching: " + this.state.searchQuery);
-      axios.get('http://' + this.state.hosting + ':8080/search/' 
-                + this.state.collection + '/' 
-                + this.state.defaultTerm + '/'
-                + this.state.searchQuery).then((response) => {
-        this.setState({
-          class: response.data
-        })
-      });
+      axios.get('http://' + this.state.hosting + ':8080/search/'
+        + this.state.collection + '/'
+        + this.state.searchQuery).then((response) => {
+          this.setState({
+            class: response.data
+          })
+        });
     }
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.term !== prevProps.term) {
+        this.setState({
+            term: this.props.term
+        });
+    }
+}
 
   render() {
     let cl = this.state.class.map((c) => {
       // var colla pse = true; 
       // console.log(description)
-      return (
-        <tr key={(c.subject.toUpperCase()) + c.id}>
-          <td>{(c.subject.toUpperCase())}</td>
-          <td>{c.id}</td>
-          <td>{c.title}   </td>
-          <MoreDescription description={c.description} code={(c.subject.toUpperCase()) + c.id} />
-          <MeetingMoreInfo term={this.state.term} code={c.subject + c.id} />
-        </tr>
-      )
+      if (c.semester.includes(this.state.term) || this.state.term === 'default'){
+        return (
+          <tr key={(c.subject.toUpperCase()) + c.id}>
+            <td>{(c.subject.toUpperCase())}</td>
+            <td>{c.id}</td>
+            <td>{c.title}   </td>
+            <MoreDescription description={c.description} code={(c.subject.toUpperCase()) + c.id} />
+            <MeetingMoreInfo term={this.state.term} code={c.subject + c.id} />
+          </tr>
+        )
+        }
     });
 
     if (this.state.routeToSearch === true) {
@@ -103,9 +109,11 @@ class Search extends Component {
             <FormGroup>
               <Label for="search">Search</Label>
               <Input id="search" value={this.state.searchQuery} onChange={(e) => {
+
                 this.setState({
                   searchQuery: e.target.value
                 });
+
               }} />
             </FormGroup>
 
@@ -128,7 +136,9 @@ class Search extends Component {
                     this.setState({
                       term: e.target.value
                     })
+                    console.log(this.state.term)
                   }}>
+                    <option value="default">Default</option>
                     <option value="spring2020">Spring 2020</option>
                     <option value="fall2019">Fall 2019</option>
                   </Input>

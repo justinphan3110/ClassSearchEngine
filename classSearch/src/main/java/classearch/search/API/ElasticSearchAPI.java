@@ -122,13 +122,13 @@ public class ElasticSearchAPI {
         return classExtract(searchResponse.toString());
     }
 
-    public List<Class> boolSearch(String index,String semester,  String text) throws IOException {
-        return boolSearch(index, semester, new ArrayList<>(Arrays.asList("Description", "Title","Code")), text);
+    public List<Class> boolSearch(String index, String text) throws IOException {
+        return boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title","Code")), text);
     }
 
 
 
-    public List<Class> boolSearch(String index, String term, List<String> fields, String text) throws IOException {
+    public List<Class> boolSearch(String index, List<String> fields, String text) throws IOException {
         SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
@@ -143,9 +143,7 @@ public class ElasticSearchAPI {
 
         List<Class> classList = classExtract(searchResponse.toString());
 
-        return classList.stream()
-                        .filter(c -> term.equals(defaultTerm) || c.getSemester().contains(term))
-                        .collect(Collectors.toList());
+        return classList;
     }
 
     public List<Class> queryString(String index, String text) throws IOException {
@@ -215,7 +213,7 @@ public class ElasticSearchAPI {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
 
         System.out.println("connected");
-        List<Class> ans = api.boolSearch(defaultINDEX, "spring2020", "eecs440");
+        List<Class> ans = api.boolSearch(defaultINDEX, "eecs440");
 //        List<Class> ans = api.queryString("fall2019", "eecs");
         System.out.println(ans);
 
