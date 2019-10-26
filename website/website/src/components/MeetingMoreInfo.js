@@ -4,7 +4,6 @@ import { Container, Table,UncontrolledPopover,Row, Col, PopoverBody, Button } fr
 import axios from 'axios';
 
 
-
 class MeetingMoreInfo extends Component {
 
     //Constructor
@@ -19,7 +18,8 @@ class MeetingMoreInfo extends Component {
             routeToClassInfo :false,
             meetings: [],
 
-            hosting: "localhost"
+            hosting: 'localhost'
+            //  hosting: '34.69.198.55'
         };
 
         this.routeToClassPage = this.routeToClassPage.bind(this);
