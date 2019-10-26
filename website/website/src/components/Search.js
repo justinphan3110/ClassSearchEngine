@@ -104,10 +104,10 @@ class Search extends Component {
         <h1>Class Search</h1>
         <Button class="testbutton" color="primary" onClick={this.toggleNewSearch.bind(this)}>Search</Button>
         <Modal isOpen={this.state.newSearchModal} toggle={this.toggleNewSearch.bind(this)}>
-          <ModalHeader toggle={this.toggleNewSearch.bind(this)}>Search a Class You Want</ModalHeader>
+          <ModalHeader toggle={this.toggleNewSearch.bind(this)}>Search for a class code or any topics</ModalHeader>
           <ModalBody>
             <FormGroup>
-              <Label for="search">Search</Label>
+              <Label for="search">For example: "functional programming"</Label>
               <Input id="search" value={this.state.searchQuery} onChange={(e) => {
 
                 this.setState({
@@ -132,6 +132,7 @@ class Search extends Component {
                 <th>TITLE</th>
                 <th>Description</th>
                 <th>
+                  <Label>Term</Label>
                   <Input size="sm" type="select" value={this.state.term} onChange={(e) => {
                     this.setState({
                       term: e.target.value
