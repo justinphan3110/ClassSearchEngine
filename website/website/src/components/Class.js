@@ -28,8 +28,8 @@ export default class Class extends React.Component {
       rate: 0,
       comment: '',
 
-      hosting: 'localhost'
-      // hosting: '34.69.198.55'
+      // hosting: 'localhost'
+      hosting: '34.69.198.55'
     };
 
     //console.log(code)

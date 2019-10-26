@@ -18,8 +18,8 @@ class MeetingMoreInfo extends Component {
             routeToClassInfo :false,
             meetings: [],
 
-            hosting: 'localhost'
-            //  hosting: '34.69.198.55'
+            // hosting: 'localhost'
+             hosting: '34.69.198.55'
         };
 
         this.routeToClassPage = this.routeToClassPage.bind(this);
