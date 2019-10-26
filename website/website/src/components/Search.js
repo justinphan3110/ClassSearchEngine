@@ -1,5 +1,5 @@
-import React, {Component } from 'react';
-import {Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
+import React, { Component } from 'react';
+import { Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
 import axios from 'axios';
 import MeetingMoreInfo from './MeetingMoreInfo';
 import MoreDescription from './MoreDescription';
@@ -11,55 +11,62 @@ import HelpDesk from './HelpImproveSearch';
 class Search extends Component {
 
   //constructor
-  constructor (props){
+  constructor(props) {
     super(props);
-    const {searchQuery} = this.props;
+    const { searchQuery } = this.props;
 
-    this.state ={
+    this.state = {
       class: [],
       newSearchModal: false,
       searchQuery,
       collection: "classes",
-      term: "fall2019",
+      defaultTerm: "spring2020",
+      term: "spring2020",
 
       routeToSearch: false,
 
-      hosting: 'localhost'
-      // hosting: '34.69.198.55'
+      // hosting: 'localhost'
+      hosting: '34.69.198.55'
     }
 
     console.log("searchQuery in constructor: " + this.state.searchQuery);
-   
+
   }
-  
-  updateSearch(){
-    axios.get('http://' + this.state.hosting + ':8080/search/' + this.state.collection + '/' + this.state.searchQuery).then((response) =>{
+
+  updateSearch() {
+    axios.get('http://' + this.state.hosting + ':8080/search/' 
+                + this.state.collection + '/' 
+                + this.state.defaultTerm +  '/' 
+                + this.state.searchQuery).then((response) => {
       this.setState({
         class: response.data
       })
     });
     this.toggleNewSearch()
-    // console.log(this.state.term)
+    console.log(this.state.defaultTerm)
   }
 
 
-  routeToSearchPage(){
+  routeToSearchPage() {
     this.setState({
-      routeToSearch : ! this.state.routeToSearch
+      routeToSearch: !this.state.routeToSearch
     });
   }
 
-  toggleNewSearch(){
+  toggleNewSearch() {
     this.setState({
-      newSearchModal: ! this.state.newSearchModal
+      newSearchModal: !this.state.newSearchModal
     });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     console.log(this.state.searchQuery)
-    if(this.state.searchQuery !== undefined){
+    if (this.state.searchQuery !== undefined) {
       console.log("searching: " + this.state.searchQuery);
-      axios.get('http://' + this.state.hosting + ':8080/search/' + this.state.collection + '/' + this.state.searchQuery).then((response) =>{
+      axios.get('http://' + this.state.hosting + ':8080/search/' 
+                + this.state.collection + '/' 
+                + this.state.defaultTerm + '/'
+                + this.state.searchQuery).then((response) => {
         this.setState({
           class: response.data
         })
@@ -76,30 +83,30 @@ class Search extends Component {
           <td>{(c.subject.toUpperCase())}</td>
           <td>{c.id}</td>
           <td>{c.title}   </td>
-          <MoreDescription description={c.description} code ={(c.subject.toUpperCase()) + c.id}/>
-          <MeetingMoreInfo term={this.state.term} code={c.subject + c.id}/>    
+          <MoreDescription description={c.description} code={(c.subject.toUpperCase()) + c.id} />
+          <MeetingMoreInfo term={this.state.term} code={c.subject + c.id} />
         </tr>
       )
     });
 
-    if(this.state.routeToSearch === true){
+    if (this.state.routeToSearch === true) {
       return <Redirect push to={'/search/' + this.state.searchQuery} />
     }
 
     return (
-      <div className= "Search">
+      <div className="Search">
         <h1>Class Search</h1>
-        <Button color="primary" onClick={this.toggleNewSearch.bind(this)}>Search</Button>
+        <Button class="testbutton" color="primary" onClick={this.toggleNewSearch.bind(this)}>Search</Button>
         <Modal isOpen={this.state.newSearchModal} toggle={this.toggleNewSearch.bind(this)}>
           <ModalHeader toggle={this.toggleNewSearch.bind(this)}>Search a Class You Want</ModalHeader>
           <ModalBody>
             <FormGroup>
-               <Label for="search">Search</Label>
-               <Input id="search" value ={this.state.searchQuery} onChange={(e) => {
-                 this.setState({
-                   searchQuery: e.target.value
-                 });
-              }}/>
+              <Label for="search">Search</Label>
+              <Input id="search" value={this.state.searchQuery} onChange={(e) => {
+                this.setState({
+                  searchQuery: e.target.value
+                });
+              }} />
             </FormGroup>
 
           </ModalBody>
@@ -107,35 +114,36 @@ class Search extends Component {
             <Button color="primary" onClick={this.routeToSearchPage.bind(this)}>Search</Button>{' '}
             <Button color="secondary" onClick={this.toggleNewSearch.bind(this)}>Cancel</Button>
           </ModalFooter>
-        </Modal>   
-
-
-        <Table hover>
-          <thead>
-            <tr>
-              <th>SUBJECT</th>
-              <th>ID</th>
-              <th>TITLE</th>
-              <th>Description</th> 
-              <th>
-                  <Input size ="sm" type="select" value={this.state.term} onChange = {(e) => {
+        </Modal>
+        <div class="table-responsive">
+          <Table hover>
+            <thead>
+              <tr>
+                <th>SUBJECT</th>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>Description</th>
+                <th>
+                  <Input size="sm" type="select" value={this.state.term} onChange={(e) => {
                     this.setState({
                       term: e.target.value
-                     })
-                    }}>
-                  <option value ="fall2019">Fall 2019</option>
-                  <option value ="spring2020">Spring 2020</option>
-              </Input>
-            </th>
-            </tr>
-          </thead>
+                    })
+                  }}>
+                    <option value="spring2020">Spring 2020</option>
+                    <option value="fall2019">Fall 2019</option>
+                  </Input>
+                </th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {cl}
-          </tbody>
-        </Table>
+            <tbody>
+              {cl}
+            </tbody>
 
-        <HelpDesk/>
+          </Table>
+        </div>
+
+        <HelpDesk />
       </div>
     );
   }

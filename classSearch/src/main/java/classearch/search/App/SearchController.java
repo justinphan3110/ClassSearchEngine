@@ -18,9 +18,9 @@ public class SearchController {
 
     public static final String URI = "search";
 
-    @RequestMapping(value = "{index}/{text}")
-    public List<Class> SearchController(@PathVariable String index, @PathVariable String text) throws IOException {
+    @RequestMapping(value = "{index}/{term}/{text}")
+    public List<Class> SearchController(@PathVariable String index, @PathVariable String term, @PathVariable String text) throws IOException {
 
-        return SearchApplication.elasticSearchAPI.boolSearch(index, text);
+        return SearchApplication.elasticSearchAPI.boolSearch(index, term, text);
     }
 }

@@ -18,8 +18,8 @@ class MeetingMoreInfo extends Component {
             routeToClassInfo :false,
             meetings: [],
 
-            hosting: 'localhost'
-            //  hosting: '34.69.198.55'
+            // hosting: 'localhost'
+             hosting: '34.69.198.55'
         };
 
         this.routeToClassPage = this.routeToClassPage.bind(this);
@@ -99,7 +99,7 @@ class MeetingMoreInfo extends Component {
             </PopoverBody>
             </UncontrolledPopover>
             </Col>
-            <Col><Button size="sm" color="primary" onClick={this.routeToClassPage}>Comment and Rating</Button></Col>
+            {/* <Col><Button size="sm" color="primary" onClick={this.routeToClassPage}>Comment and Rating</Button></Col> */}
           </Row>
           </Container>
          </td>
