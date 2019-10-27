@@ -1,0 +1,377 @@
+
+> website@0.1.0 start /home/lnp26/github/ClassSearchEngine/website/website
+> react-scripts start
+
+Starting the development server...
+
+Compiled with warnings.
+
+Warning in ./src/App.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/App.js
+  1:17  warning  'useState' is defined but never used  no-unused-vars
+  3:8   warning  'axios' is defined but never used     no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/Class.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/Class.js
+    2:40  warning  'glyphicon' is defined but never used        no-unused-vars
+  135:9   warning  'rating' is assigned a value but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/MoreDescription.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/MoreDescription.js
+  47:38  warning  No duplicate props allowed  react/jsx-no-duplicate-props
+
+✖ 1 problem (0 errors, 1 warning)
+
+
+Warning in ./src/components/HelpImproveSearch.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/HelpImproveSearch.js
+  2:124  warning  'Table' is defined but never used                 no-unused-vars
+  2:139  warning  'Collapse' is defined but never used              no-unused-vars
+  2:149  warning  'CardBody' is defined but never used              no-unused-vars
+  2:159  warning  'Card' is defined but never used                  no-unused-vars
+  2:165  warning  'UncontrolledCollapse' is defined but never used  no-unused-vars
+  2:187  warning  'FormText' is defined but never used              no-unused-vars
+  2:197  warning  'Col' is defined but never used                   no-unused-vars
+  2:202  warning  'ButtonGroup' is defined but never used           no-unused-vars
+
+✖ 8 problems (0 errors, 8 warnings)
+
+
+Warning in ./src/components/RateInstructor.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/RateInstructor.js
+  3:23   warning  'ListGroup' is defined but never used      no-unused-vars
+  3:34   warning  'ListGroupItem' is defined but never used  no-unused-vars
+  3:49   warning  'CustomInput' is defined but never used    no-unused-vars
+  3:80   warning  'Modal' is defined but never used          no-unused-vars
+  3:87   warning  'ModalHeader' is defined but never used    no-unused-vars
+  3:100  warning  'ModalBody' is defined but never used      no-unused-vars
+  3:111  warning  'ModalFooter' is defined but never used    no-unused-vars
+  3:124  warning  'Table' is defined but never used          no-unused-vars
+  3:139  warning  'Collapse' is defined but never used       no-unused-vars
+  3:187  warning  'FormText' is defined but never used       no-unused-vars
+
+✖ 10 problems (0 errors, 10 warnings)
+
+
+You may use special comments to disable some warnings.
+Use // eslint-disable-next-line to ignore the next line.
+Use /* eslint-disable */ to ignore all warnings in a file.
+
+> website@0.1.0 start /home/lnp26/github/ClassSearchEngine/website/website
+> react-scripts start
+
+Starting the development server...
+
+
+> website@0.1.0 start /home/lnp26/github/ClassSearchEngine/website/website
+> react-scripts start
+
+Starting the development server...
+
+Compiled with warnings.
+
+Warning in ./src/App.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/App.js
+  1:17  warning  'useState' is defined but never used  no-unused-vars
+  3:8   warning  'axios' is defined but never used     no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/Class.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/Class.js
+    2:40  warning  'glyphicon' is defined but never used        no-unused-vars
+  135:9   warning  'rating' is assigned a value but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/MoreDescription.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/MoreDescription.js
+  47:38  warning  No duplicate props allowed  react/jsx-no-duplicate-props
+
+✖ 1 problem (0 errors, 1 warning)
+
+
+Warning in ./src/components/HelpImproveSearch.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/HelpImproveSearch.js
+  2:124  warning  'Table' is defined but never used                 no-unused-vars
+  2:139  warning  'Collapse' is defined but never used              no-unused-vars
+  2:149  warning  'CardBody' is defined but never used              no-unused-vars
+  2:159  warning  'Card' is defined but never used                  no-unused-vars
+  2:165  warning  'UncontrolledCollapse' is defined but never used  no-unused-vars
+  2:187  warning  'FormText' is defined but never used              no-unused-vars
+  2:197  warning  'Col' is defined but never used                   no-unused-vars
+  2:202  warning  'ButtonGroup' is defined but never used           no-unused-vars
+
+✖ 8 problems (0 errors, 8 warnings)
+
+
+Warning in ./src/components/RateInstructor.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/RateInstructor.js
+  3:23   warning  'ListGroup' is defined but never used      no-unused-vars
+  3:34   warning  'ListGroupItem' is defined but never used  no-unused-vars
+  3:49   warning  'CustomInput' is defined but never used    no-unused-vars
+  3:80   warning  'Modal' is defined but never used          no-unused-vars
+  3:87   warning  'ModalHeader' is defined but never used    no-unused-vars
+  3:100  warning  'ModalBody' is defined but never used      no-unused-vars
+  3:111  warning  'ModalFooter' is defined but never used    no-unused-vars
+  3:124  warning  'Table' is defined but never used          no-unused-vars
+  3:139  warning  'Collapse' is defined but never used       no-unused-vars
+  3:187  warning  'FormText' is defined but never used       no-unused-vars
+
+✖ 10 problems (0 errors, 10 warnings)
+
+
+You may use special comments to disable some warnings.
+Use // eslint-disable-next-line to ignore the next line.
+Use /* eslint-disable */ to ignore all warnings in a file.
+
+> website@0.1.0 start /home/lnp26/github/ClassSearchEngine/website/website
+> react-scripts start
+
+Something is already running on port 3000.
+
+> website@0.1.0 start /home/lnp26/github/ClassSearchEngine/website/website
+> react-scripts start
+
+Something is already running on port 3000.
+
+> website@0.1.0 start /home/lnp26/github/ClassSearchEngine/website/website
+> react-scripts start
+
+Starting the development server...
+
+Compiled with warnings.
+
+Warning in ./src/App.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/App.js
+  1:17  warning  'useState' is defined but never used  no-unused-vars
+  3:8   warning  'axios' is defined but never used     no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/Class.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/Class.js
+    2:40  warning  'glyphicon' is defined but never used        no-unused-vars
+  135:9   warning  'rating' is assigned a value but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/MoreDescription.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/MoreDescription.js
+  47:38  warning  No duplicate props allowed  react/jsx-no-duplicate-props
+
+✖ 1 problem (0 errors, 1 warning)
+
+
+Warning in ./src/components/HelpImproveSearch.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/HelpImproveSearch.js
+  2:124  warning  'Table' is defined but never used                 no-unused-vars
+  2:139  warning  'Collapse' is defined but never used              no-unused-vars
+  2:149  warning  'CardBody' is defined but never used              no-unused-vars
+  2:159  warning  'Card' is defined but never used                  no-unused-vars
+  2:165  warning  'UncontrolledCollapse' is defined but never used  no-unused-vars
+  2:187  warning  'FormText' is defined but never used              no-unused-vars
+  2:197  warning  'Col' is defined but never used                   no-unused-vars
+  2:202  warning  'ButtonGroup' is defined but never used           no-unused-vars
+
+✖ 8 problems (0 errors, 8 warnings)
+
+
+Warning in ./src/components/RateInstructor.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/RateInstructor.js
+  3:23   warning  'ListGroup' is defined but never used      no-unused-vars
+  3:34   warning  'ListGroupItem' is defined but never used  no-unused-vars
+  3:49   warning  'CustomInput' is defined but never used    no-unused-vars
+  3:80   warning  'Modal' is defined but never used          no-unused-vars
+  3:87   warning  'ModalHeader' is defined but never used    no-unused-vars
+  3:100  warning  'ModalBody' is defined but never used      no-unused-vars
+  3:111  warning  'ModalFooter' is defined but never used    no-unused-vars
+  3:124  warning  'Table' is defined but never used          no-unused-vars
+  3:139  warning  'Collapse' is defined but never used       no-unused-vars
+  3:187  warning  'FormText' is defined but never used       no-unused-vars
+
+✖ 10 problems (0 errors, 10 warnings)
+
+
+You may use special comments to disable some warnings.
+Use // eslint-disable-next-line to ignore the next line.
+Use /* eslint-disable */ to ignore all warnings in a file.
+
+> website@0.1.0 start /home/lnp26/github/ClassSearchEngine/website/website
+> react-scripts start
+
+Something is already running on port 3000.
+
+> website@0.1.0 start /home/lnp26/github/ClassSearchEngine/website/website
+> react-scripts start
+
+Starting the development server...
+
+Compiled with warnings.
+
+Warning in ./src/App.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/App.js
+  1:17  warning  'useState' is defined but never used  no-unused-vars
+  3:8   warning  'axios' is defined but never used     no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/Class.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/Class.js
+    2:40  warning  'glyphicon' is defined but never used        no-unused-vars
+  135:9   warning  'rating' is assigned a value but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/MoreDescription.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/MoreDescription.js
+  47:38  warning  No duplicate props allowed  react/jsx-no-duplicate-props
+
+✖ 1 problem (0 errors, 1 warning)
+
+
+Warning in ./src/components/HelpImproveSearch.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/HelpImproveSearch.js
+  2:124  warning  'Table' is defined but never used                 no-unused-vars
+  2:139  warning  'Collapse' is defined but never used              no-unused-vars
+  2:149  warning  'CardBody' is defined but never used              no-unused-vars
+  2:159  warning  'Card' is defined but never used                  no-unused-vars
+  2:165  warning  'UncontrolledCollapse' is defined but never used  no-unused-vars
+  2:187  warning  'FormText' is defined but never used              no-unused-vars
+  2:197  warning  'Col' is defined but never used                   no-unused-vars
+  2:202  warning  'ButtonGroup' is defined but never used           no-unused-vars
+
+✖ 8 problems (0 errors, 8 warnings)
+
+
+Warning in ./src/components/RateInstructor.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/RateInstructor.js
+  3:23   warning  'ListGroup' is defined but never used      no-unused-vars
+  3:34   warning  'ListGroupItem' is defined but never used  no-unused-vars
+  3:49   warning  'CustomInput' is defined but never used    no-unused-vars
+  3:80   warning  'Modal' is defined but never used          no-unused-vars
+  3:87   warning  'ModalHeader' is defined but never used    no-unused-vars
+  3:100  warning  'ModalBody' is defined but never used      no-unused-vars
+  3:111  warning  'ModalFooter' is defined but never used    no-unused-vars
+  3:124  warning  'Table' is defined but never used          no-unused-vars
+  3:139  warning  'Collapse' is defined but never used       no-unused-vars
+  3:187  warning  'FormText' is defined but never used       no-unused-vars
+
+✖ 10 problems (0 errors, 10 warnings)
+
+
+You may use special comments to disable some warnings.
+Use // eslint-disable-next-line to ignore the next line.
+Use /* eslint-disable */ to ignore all warnings in a file.
+
+> website@0.1.0 start /home/lnp26/github/ClassSearchEngine/website/website
+> react-scripts start
+
+Starting the development server...
+
+Compiled with warnings.
+
+Warning in ./src/App.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/App.js
+  1:17  warning  'useState' is defined but never used  no-unused-vars
+  3:8   warning  'axios' is defined but never used     no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/Class.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/Class.js
+    2:40  warning  'glyphicon' is defined but never used        no-unused-vars
+  135:9   warning  'rating' is assigned a value but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+
+Warning in ./src/components/MoreDescription.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/MoreDescription.js
+  47:38  warning  No duplicate props allowed  react/jsx-no-duplicate-props
+
+✖ 1 problem (0 errors, 1 warning)
+
+
+Warning in ./src/components/HelpImproveSearch.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/HelpImproveSearch.js
+  2:124  warning  'Table' is defined but never used                 no-unused-vars
+  2:139  warning  'Collapse' is defined but never used              no-unused-vars
+  2:149  warning  'CardBody' is defined but never used              no-unused-vars
+  2:159  warning  'Card' is defined but never used                  no-unused-vars
+  2:165  warning  'UncontrolledCollapse' is defined but never used  no-unused-vars
+  2:187  warning  'FormText' is defined but never used              no-unused-vars
+  2:197  warning  'Col' is defined but never used                   no-unused-vars
+  2:202  warning  'ButtonGroup' is defined but never used           no-unused-vars
+
+✖ 8 problems (0 errors, 8 warnings)
+
+
+Warning in ./src/components/RateInstructor.js
+
+/home/lnp26/github/ClassSearchEngine/website/website/src/components/RateInstructor.js
+  3:23   warning  'ListGroup' is defined but never used      no-unused-vars
+  3:34   warning  'ListGroupItem' is defined but never used  no-unused-vars
+  3:49   warning  'CustomInput' is defined but never used    no-unused-vars
+  3:80   warning  'Modal' is defined but never used          no-unused-vars
+  3:87   warning  'ModalHeader' is defined but never used    no-unused-vars
+  3:100  warning  'ModalBody' is defined but never used      no-unused-vars
+  3:111  warning  'ModalFooter' is defined but never used    no-unused-vars
+  3:124  warning  'Table' is defined but never used          no-unused-vars
+  3:139  warning  'Collapse' is defined but never used       no-unused-vars
+  3:187  warning  'FormText' is defined but never used       no-unused-vars
+
+✖ 10 problems (0 errors, 10 warnings)
+
+
+You may use special comments to disable some warnings.
+Use // eslint-disable-next-line to ignore the next line.
+Use /* eslint-disable */ to ignore all warnings in a file.
+The build failed because the process exited too early. Someone might have called `kill` or `killall`, or the system could be shutting down.
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! website@0.1.0 start: `react-scripts start`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the website@0.1.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/lnp26/.npm/_logs/2019-10-26T21_04_48_956Z-debug.log

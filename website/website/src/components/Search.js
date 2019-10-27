@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
 import axios from 'axios';
+import {Event} from "./Tracking";
 import MeetingMoreInfo from './MeetingMoreInfo';
 import MoreDescription from './MoreDescription';
 import { Redirect, withRouter } from 'react-router-dom';
@@ -51,6 +52,7 @@ class Search extends Component {
   }
 
   toggleNewSearch() {
+    Event("SEARCH", "searching " + this.state.searchQuery , "SEARCH_PAGE");
     this.setState({
       newSearchModal: !this.state.newSearchModal
     });
