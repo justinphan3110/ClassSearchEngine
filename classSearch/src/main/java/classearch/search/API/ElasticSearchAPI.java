@@ -132,7 +132,7 @@ public class ElasticSearchAPI {
         SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
-        
+
         for(String filed: fields)
             qb.should(new MatchPhraseQueryBuilder(filed, text).slop(defaultSLOP));
 
