@@ -47,7 +47,7 @@ class SISData:
                           })
 
     def ratingInstructor(self, instructorName):
-        json_file = open(r'C:\Users\Admin\Desktop\RMF\rating.json')
+        json_file = open('/home/lnp26/github/ClassSearchEngine/lib/rating.json')
         dataRating = json.load(json_file)
         length = len(dataRating['name'])
         for i in range(0, length):
@@ -94,7 +94,7 @@ class SISData:
         return table
 
 cleaner = SISData()
-cleaner.reading(r'D:\ClassSearchEngine\crawling\sis\soc.xml')
+# cleaner.reading(r'D:\ClassSearchEngine\crawling\sis\soc.xml')
 # cleaner.reading('/home/long/github/ClassSearchEngine/lib/soc.xml')
 cleaner.reading('/home/lnp26/github/ClassSearchEngine/lib/soc.xml')
 
