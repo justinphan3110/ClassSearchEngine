@@ -197,13 +197,20 @@ public class ElasticSearchAPI {
                     meeting.getString("Room"),
                     Integer.parseInt(meeting.getString("number")),
                     meeting.getString("DayTime"),
-                    meeting.getString("Instructor")
+                    mapper(meeting.getJsonObject("Instructor"))
             ));
         }
 
         return meetingMap;
     }
 
+    private Map<String, String> mapper(JsonObject jsonObject) {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", jsonObject.getString("name"));
+        map.put("quality", jsonObject.getString("quality"));
+        map.put("difficulty", jsonObject.getString("difficulty"));
+        return map;
+    }
 
     public static void main(String[] args) throws IOException {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
