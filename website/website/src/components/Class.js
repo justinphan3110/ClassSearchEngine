@@ -119,14 +119,14 @@ export default class Class extends React.Component {
         rate: this.state.rate
       }
     };
-    let url = "http://" + this.state.hosting + ":8080/rating/" + this.state.code + '/' + JSON.stringify(rating) 
-    axios.post(url).then(res => {
-      console.log(res);
-      console.log(res.data);
-    });
+    // let url = "http://" + this.state.hosting + ":8080/rating/" + this.state.code + '/' + JSON.stringify(rating) 
+    // axios.post(url).then(res => {
+    //   console.log(res);
+    //   console.log(res.data);
+    // });
     
-    console.log(rating);
-    console.log(url);
+    // console.log(rating);
+    // console.log(url);
   }
  
  
