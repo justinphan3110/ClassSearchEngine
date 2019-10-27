@@ -3,7 +3,9 @@ import './App.css';
 import axios from 'axios';
 import Search from './components/Search';
 import Class from './components/Class';
+import ReactGA from 'react-ga'
 import {Switch, BrowserRouter as Router, Route} from 'react-router-dom';
+
 
 class App extends Component {
   state ={
@@ -15,7 +17,11 @@ class App extends Component {
 
   }
   
-  
+  componentDidMount(){
+    ReactGA.initialize("UA-150976119-1")
+    ReactGA.pageview(window.location.pathname 
+                  + window.location.search);
+  }
   render() {
     return(
       <Router >
