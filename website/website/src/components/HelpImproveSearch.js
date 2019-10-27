@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import { Form, Input, ListGroup, ListGroupItem, CustomInput, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
-
+import React, { Component} from 'react';
+import { Form, Input, ListGroup, ListGroupItem, CustomInput, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button, Collapse, CardBody, Card, UncontrolledCollapse, FormText, Col, ButtonGroup } from 'reactstrap';
+import RateInstructor from './RateInstructor';
 
 export default class HelpDesk extends Component {
-
     state = {
         searchQuery: "",
         helpDeskModal: false
@@ -33,24 +32,25 @@ export default class HelpDesk extends Component {
                             </FormGroup>
                         </Form>
                         <ListGroup>
-                            <ListGroupItem tag="button" action active> 
+                            <ListGroupItem tag="button" action active>
                                 <Label for="exampleCustomFileBrowser">Drop your syllabus here</Label>
                                 <CustomInput type="file" id="exampleCustomFileBrowser" name="customFile" />
                             </ListGroupItem>
                             <ListGroupItem tag="button" action>Type your syllabus</ListGroupItem>
                             <ListGroupItem tag="button" action>Rate A Class</ListGroupItem>
-                            <ListGroupItem tag="button" action>Rate An Instructor</ListGroupItem>
+                            <ListGroupItem tag="button" id="rateInstructor" action>Rate An Instructor</ListGroupItem>
+                            <RateInstructor/>
+
                         </ListGroup>
-
-
 
                     </ModalBody>
                     <ModalFooter>
-                        {/* <Button color="primary" onClick={this.routeToSearchPage.bind(this)}>Search</Button>{' '} */}
                         <Button color="secondary" onClick={this.toggleHelpDesk.bind(this)}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
             </div>
+
         )
     }
+
 }

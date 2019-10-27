@@ -7,6 +7,7 @@ class SISData:
     # db = None
     def __init__(self):
         connection = MongoClient('localhost', 27017)
+        # connection = MongoClient('localhost', 27017)
         self.db = connection['classCrawling']
 
 
@@ -94,6 +95,8 @@ class SISData:
 
 cleaner = SISData()
 cleaner.reading(r'D:\ClassSearchEngine\crawling\sis\soc.xml')
+# cleaner.reading('/home/long/github/ClassSearchEngine/lib/soc.xml')
+cleaner.reading('/home/lnp26/github/ClassSearchEngine/lib/soc.xml')
 
 
 

@@ -23,7 +23,7 @@ class App extends Component {
           <Switch>
           <Route key="home" path="/" exact strict component={Search}/>
           <Route  path="/search/:searchQuery" exact strict render={({match}) => (
-            <Search key={"searchPage" + match.params.searchQuery} searchQuery={match.params.searchQuery}/>   
+            <Search key={"searchPage" + match.params.searchQuery + Math.random()} searchQuery={match.params.searchQuery}/>   
           )}/>
           <Route path="/class/:code" exact strict render={({match}) => (
             <Class code={match.params.code}/>   

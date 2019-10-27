@@ -33,9 +33,12 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ElasticSearchAPI {
     public static final String defaultINDEX = "classes";
+
+    private final String defaultTerm = "default";
 
     // localHost credentials
     private static final String HOST = "localhost";
@@ -129,7 +132,7 @@ public class ElasticSearchAPI {
         SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
-
+        
         for(String filed: fields)
             qb.should(new MatchPhraseQueryBuilder(filed, text).slop(defaultSLOP));
 
@@ -138,7 +141,6 @@ public class ElasticSearchAPI {
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
         List<Class> classList = classExtract(searchResponse.toString());
-        Collections.sort(classList);
 
         return classList;
     }
@@ -173,7 +175,8 @@ public class ElasticSearchAPI {
                    source.getString("Catalog"),
                    source.getString("Title"),
                    source.getString("Description"),
-                   source.getString("Credit")
+                   source.getString("Credit"),
+                   Arrays.asList(source.getString("Term").split(" "))
            ));
         });
 
@@ -216,7 +219,7 @@ public class ElasticSearchAPI {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
 
         System.out.println("connected");
-        List<Class> ans = api.boolSearch(defaultINDEX, "acct100");
+        List<Class> ans = api.boolSearch(defaultINDEX, "eecs440");
 //        List<Class> ans = api.queryString("fall2019", "eecs");
         System.out.println(ans);
 

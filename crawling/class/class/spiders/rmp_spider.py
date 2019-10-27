@@ -58,9 +58,9 @@ class RateMyProfScraper:
                 return self.professorlist[self.indexnumber][key]
 
 
-CWRU = RateMyProfScraper(186)
-CWRU.SearchProfessor("Chris Butler")
-print(CWRU.GetNumOfProfessors(186))
+# CWRU = RateMyProfScraper(186)
+# CWRU.SearchProfessor("Chris Butler")
+# print(CWRU.GetNumOfProfessors(186))
 # CWRU.PrintProfessorDetail("overall_rating")
 # print(CWRU.professorlist)
 
