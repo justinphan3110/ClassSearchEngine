@@ -7,9 +7,10 @@ import com.mongodb.client.MongoDatabase;
 import  com.mongodb.client.model.Filters;
 import io.vertx.core.json.JsonObject;
 import org.bson.Document;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.io.IOException;
 
 public class ClassInfoAPI {
 
@@ -40,6 +41,7 @@ public class ClassInfoAPI {
         searchQuery.put("Code", code);
 
         List<Meeting> meetings = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
 
         MongoCursor<Document> cursor = collection.find(Filters.eq("Code", code)).iterator();
         try{
@@ -52,15 +54,24 @@ public class ClassInfoAPI {
                             jsonObject.getString("Component"),
                             Integer.parseInt(jsonObject.getString("number")),
                             jsonObject.getString("DayTime"),
-                            jsonObject.getString("Instructor")
+                            mapper(jsonObject.getJsonObject("Instructor"))
                     ));
 
             }
-        }finally {
+        }
+        finally {
             cursor.close();
         }
 
         return meetings;
+    }
+
+    private Map<String, String> mapper(JsonObject jsonObject) {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", jsonObject.getString("name"));
+        map.put("quality", jsonObject.getString("quality"));
+        map.put("difficulty", jsonObject.getString("difficulty"));
+        return map;
     }
 
     public static void main(String[] args) {
