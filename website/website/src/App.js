@@ -1,6 +1,6 @@
 import React, { useState, Component } from 'react';
 import './App.css';
-import axios from 'axios';
+import {PageView, initGA} from './components/Tracking'; 
 import Search from './components/Search';
 import Class from './components/Class';
 import ReactGA from 'react-ga'
@@ -18,10 +18,10 @@ class App extends Component {
   }
   
   componentDidMount(){
-    ReactGA.initialize("UA-150976119-1")
-    ReactGA.pageview(window.location.pathname 
-                  + window.location.search);
+    initGA("UA-150976119-1");
+    PageView();
   }
+  
   render() {
     return(
       <Router >

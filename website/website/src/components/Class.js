@@ -107,6 +107,7 @@ export default class Class extends React.Component {
       if (ListTag[i].selected)
         tags.push(ListTag[i].value);  
     };
+     
     let url = "http://" + this.state.hosting + ":8080/rating/" + this.state.code + "/rate"
     const rating = {
       code: this.state.code,
@@ -118,8 +119,8 @@ export default class Class extends React.Component {
         rate: this.state.rate
       }
     };
-    
-    axios.post(url, rating).then(res => {
+    let url = "http://localhost:8080/rating/" + this.state.code + '/' + JSON.stringify(rating) 
+    axios.post(url).then(res => {
       console.log(res);
       console.log(res.data);
     });

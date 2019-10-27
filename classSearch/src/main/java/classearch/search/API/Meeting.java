@@ -1,5 +1,6 @@
 package classearch.search.API;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class Meeting implements Comparable<Meeting>{
@@ -8,7 +9,7 @@ public class Meeting implements Comparable<Meeting>{
     private final String component;
     private final int number;
     private final String dayTime;
-    private final String instructor;
+    private final Map<String, String> instructor;
 
     public String getCode() {
         return code;
@@ -30,11 +31,11 @@ public class Meeting implements Comparable<Meeting>{
         return dayTime;
     }
 
-    public String getInstructor() {
+    public Map<String, String> getInstructor() {
         return instructor;
     }
 
-    private Meeting(String code, String room, String component, int number, String dayTime, String instructor) {
+    private Meeting(String code, String room, String component, int number, String dayTime, Map<String, String> instructor) {
         this.code = code;
         this.room = room;
         this.component = component;
@@ -55,7 +56,7 @@ public class Meeting implements Comparable<Meeting>{
                 '}';
     }
 
-    public static final Meeting of(String code, String room, String component, int number, String dayTime, String instructor){
+    public static final Meeting of(String code, String room, String component, int number, String dayTime, Map<String, String> instructor){
         Objects.requireNonNull(code, "code can not be null");
         Objects.requireNonNull(room, "room can not be null");
         Objects.requireNonNull(component, "component can not be null");
