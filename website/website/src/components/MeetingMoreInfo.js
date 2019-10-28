@@ -58,7 +58,6 @@ class MeetingMoreInfo extends Component {
 
     render() {
         let meeting = this.state.meetings.map((c) => {
-            
             return (
                 <tr key={this.state.code + c.number}>
                     <td>{(c.number)}</td>

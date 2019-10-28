@@ -123,7 +123,31 @@ public class ElasticSearchAPI {
     }
 
     public List<Class> boolSearch(String index, String text) throws IOException {
-        return boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title","Code")), text);
+        List<String> searchQuery = Arrays.asList(text.split(" "));
+
+        Set<Class> result = new HashSet<>(
+                                boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title", "Code")), text));
+
+        for(int i = 0; i < searchQuery.size(); i++){
+            String current = searchQuery.get(i);
+            List<String> temp = new ArrayList<>(searchQuery);
+            StringBuilder sb = new StringBuilder(current);
+
+            if(sb.length() > 0) {
+                if (current.charAt(current.length() - 1) != 's')
+                    sb.append('s');
+                else
+                    sb.setLength(sb.length() - 1);
+            }
+
+            temp.set(i, sb.toString());
+            boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title", "Code")), String.join(" ", temp))
+                    .forEach(c -> result.add(c));
+
+        }
+
+
+        return new ArrayList<>(result);
     }
 
 
@@ -219,7 +243,7 @@ public class ElasticSearchAPI {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
 
         System.out.println("connected");
-        List<Class> ans = api.boolSearch(defaultINDEX, "eecs440");
+        List<Class> ans = api.boolSearch(defaultINDEX, "stocks");
 //        List<Class> ans = api.queryString("fall2019", "eecs");
         System.out.println(ans);
 

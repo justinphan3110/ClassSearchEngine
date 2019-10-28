@@ -80,6 +80,8 @@ class Search extends Component {
     }
 }
 
+  
+
   render() {
     let cl = this.state.class.map((c) => {
       // var colla pse = true; 
