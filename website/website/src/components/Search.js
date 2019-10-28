@@ -110,7 +110,12 @@ class Search extends Component {
           <ModalBody>
             <FormGroup>
               <Label for="search">For example: "functional programming"</Label>
-              <Input id="search" value={this.state.searchQuery} onChange={(e) => {
+              <Input id="search" onKeyPress={e => {
+                                  if(e.key === "Enter"){
+                                    console.log("enter")
+                                    this.routeToSearchPage();
+                                  }
+                              }} value={this.state.searchQuery} onChange={(e) => {
 
                 this.setState({
                   searchQuery: e.target.value
@@ -121,7 +126,7 @@ class Search extends Component {
 
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.routeToSearchPage.bind(this)}>Search</Button>{' '}
+            <Button color="primary"   onClick={this.routeToSearchPage.bind(this)}>Search</Button>{' '}
             <Button color="secondary" onClick={this.toggleNewSearch.bind(this)}>Cancel</Button>
           </ModalFooter>
         </Modal>
@@ -141,7 +146,7 @@ class Search extends Component {
                     })
                     console.log(this.state.term)
                   }}>
-                    <option value="default">Default</option>
+                    <option value="default">All Term</option>
                     <option value="spring2020">Spring 2020</option>
                     <option value="fall2019">Fall 2019</option>
                   </Input>

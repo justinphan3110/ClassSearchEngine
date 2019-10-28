@@ -82,10 +82,10 @@ class MeetingMoreInfo extends Component {
             <Row>
             <Col>
            <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this)}>Meeting Info</Button>
-           <UncontrolledPopover  placement="auto"  trigger="legacy" 
+           <UncontrolledPopover classNAme="meetingInfoContainer" placement="auto"  trigger="legacy" 
                     flip={false} target={this.state.code}>
             <PopoverBody>
-            <Table responsive size="sm">
+            <Table size="lg">
             <thead key={this.state.code + "header"}>
                 <tr>
                 <th>#</th>
