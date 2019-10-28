@@ -18,7 +18,7 @@ class MeetingMoreInfo extends Component {
             routeToClassInfo :false,
             meetings: [],
 
-            // hosting: 'localhost'
+             //hosting: 'localhost'
              hosting: '34.69.198.55'
         };
 
@@ -54,7 +54,7 @@ class MeetingMoreInfo extends Component {
         });
         // this.props.history.push('/class/' + this.state.code);
     }
-
+    //preventOverflow: {boundariesElement: "viewport"}
 
     render() {
         let meeting = this.state.meetings.map((c) => {
@@ -64,8 +64,10 @@ class MeetingMoreInfo extends Component {
                     <td>{(c.number)}</td>
                     <td>{c.dayTime}</td>
                     <td>{c.room}</td>
-                    <td>{c.instructor}</td>
                     <td>{c.component}</td>
+                    <td>{c.instructor.name}</td>
+                    <td>{c.instructor.quality}</td>
+                    <td>{c.instructor.difficulty}</td>
                 </tr>
             )
         });
@@ -73,24 +75,26 @@ class MeetingMoreInfo extends Component {
         if(this.state.routeToClassInfo === true){
             return <Redirect push to={'/class/' + this.state.code} />
         }
-
+//modifiers={{preventOverflow: {boundariesElement: 'viewPort'}}}
         return (
             <td>
             <Container>
             <Row>
             <Col>
            <Button id={this.state.code} color="info" size="sm" onClick={this.getClassInfo.bind(this)}>Meeting Info</Button>
-           <UncontrolledPopover  placement="bottom"  
-                    trigger="legacy" flip={false} modifiers={{preventOverflow: {boundariesElement: "viewport"}}} target={this.state.code}>
+           <UncontrolledPopover  placement="auto"  trigger="legacy" 
+                    flip={false} target={this.state.code}>
             <PopoverBody>
-            <Table size="sm" >
+            <Table responsive size="sm">
             <thead key={this.state.code + "header"}>
                 <tr>
                 <th>#</th>
                 <th>Time</th>
                 <th>Room</th>
-                <th>Instructor</th>
                 <th>Component</th>
+                <th>Instructor</th>
+                <th>RMP's quality</th>
+                <th>RMP's difficulty</th>
                 </tr>
             </thead>
 

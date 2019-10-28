@@ -37,14 +37,16 @@ export default class MoreDescription extends Component {
         }
     }
 
+    //flip: { behavior: ['bottom'], 
+
     render() {
         return (
             <td>
               <Button id={this.state.code} type="button" size="sm">
                 Class Description
               </Button>
-              <UncontrolledPopover  placement="bottom" modifiers={{ flip: { behavior: ['bottom'] } }}
-                    trigger="legacy" placement="bottom" target={this.state.code}>
+              <UncontrolledPopover  placement="bottom" modifiers={{ flip: { behavior: ['bottom'] }} }
+                    trigger="legacy"  target={this.state.code}>
                 <PopoverHeader>{this.state.code}</PopoverHeader>
                     <PopoverBody>
                         {this.state.description} </PopoverBody>
