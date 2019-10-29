@@ -96,9 +96,9 @@ class SISData:
 
 cleaner = SISData()
 # cleaner.reading(r'D:\ClassSearchEngine\crawling\sis\soc.xml')
-# cleaner.reading('/home/long/github/ClassSearchEngine/lib/soc.xml')
-cleaner.reading('/home/lnp26/github/ClassSearchEngine/lib/soc_2018.xml')
 cleaner.reading('/home/lnp26/github/ClassSearchEngine/lib/soc.xml')
+cleaner.reading('/home/lnp26/github/ClassSearchEngine/lib/soc_2018.xml')
+# cleaner.reading('/home/lnp26/github/ClassSearchEngine/lib/soc.xml')
 
 
 
