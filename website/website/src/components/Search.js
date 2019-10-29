@@ -29,9 +29,9 @@ class Search extends Component {
     }
 
     console.log("searchQuery in constructor: " + this.state.searchQuery);
-   
+
   }
-  
+
   updateSearch(){
     axios.get('http://' + this.state.hosting + ':8080/search/' + this.state.collection + '/' + this.state.searchQuery).then((response) =>{
       this.setState({
@@ -69,7 +69,7 @@ class Search extends Component {
 
   render() {
     let cl = this.state.class.map((c) => {
-      // var colla pse = true; 
+      // var colla pse = true;
       // console.log(description)
       return (
         <tr key={(c.subject.toUpperCase()) + c.id}>
@@ -77,7 +77,7 @@ class Search extends Component {
           <td>{c.id}</td>
           <td>{c.title}   </td>
           <MoreDescription description={c.description} code ={(c.subject.toUpperCase()) + c.id}/>
-          <MeetingMoreInfo term={this.state.term} code={c.subject + c.id}/>    
+          <MeetingMoreInfo term={this.state.term} code={c.subject + c.id}/>
         </tr>
       )
     });
@@ -107,7 +107,7 @@ class Search extends Component {
             <Button color="primary" onClick={this.routeToSearchPage.bind(this)}>Search</Button>{' '}
             <Button color="secondary" onClick={this.toggleNewSearch.bind(this)}>Cancel</Button>
           </ModalFooter>
-        </Modal>   
+        </Modal>
 
 
         <Table hover>
@@ -116,7 +116,7 @@ class Search extends Component {
               <th>SUBJECT</th>
               <th>ID</th>
               <th>TITLE</th>
-              <th>Description</th> 
+              <th>Description</th>
               <th>
                   <Input size ="sm" type="select" value={this.state.term} onChange = {(e) => {
                     this.setState({
@@ -135,7 +135,7 @@ class Search extends Component {
           </tbody>
         </Table>
 
-        <HelpDesk/>
+        {/*<HelpDesk/>*/}
       </div>
     );
   }
