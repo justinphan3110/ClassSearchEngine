@@ -80,11 +80,11 @@ class Search extends Component {
     }
 }
 
-  
+
 
   render() {
     let cl = this.state.class.map((c) => {
-      // var colla pse = true; 
+      // var colla pse = true;
       // console.log(description)
       if (c.semester.includes(this.state.term) || this.state.term === 'default'){
         return (
@@ -166,7 +166,7 @@ class Search extends Component {
           </Table>
         </div>
 
-        <HelpDesk />
+        {/*<HelpDesk />*/}
       </div>
     );
   }
