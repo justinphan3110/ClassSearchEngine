@@ -9,7 +9,7 @@ class StockSpider(scrapy.Spider):
   mainUrl = 'http://bulletin.case.edu/course-descriptions/'
   start_urls = ['http://bulletin.case.edu/course-descriptions/#text']
   courseList = []
-  termMap = {'fall2019': 'fall2019', 'spring2020': 'spring2020'}
+  termMap = {'spring2018', 'summer2018', 'fall2018', 'fall2019','spring2020'}
   writer = None
 
 
@@ -81,7 +81,7 @@ class StockSpider(scrapy.Spider):
         query = {'Code': code}
         termDict = ""
         for term in self.termMap:
-          termCol = self.db[self.termMap[term]]
+          termCol = self.db[term]
           cursor = termCol.find(query)
           if cursor.count() != 0:
             # print(term)
