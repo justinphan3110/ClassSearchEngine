@@ -9,7 +9,7 @@ class StockSpider(scrapy.Spider):
   mainUrl = 'http://bulletin.case.edu/course-descriptions/'
   start_urls = ['http://bulletin.case.edu/course-descriptions/#text']
   courseList = []
-  termMap = {'spring2018', 'summer2018', 'fall2018', 'fall2019','spring2020'}
+  termMap = {'spring2018', 'summer2018', 'fall2018', 'spring2019', 'summer2019', 'fall2019','spring2020'}
   writer = None
 
 

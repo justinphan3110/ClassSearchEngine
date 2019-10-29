@@ -151,6 +151,8 @@ class Search extends Component {
                     <option value="default">All Term</option>
                     <option value="spring2020">Spring 2020</option>
                     <option value="fall2019">Fall 2019</option>
+                    <option value="spring2019">Spring 2019</option>
+                    <option value="summer2019">Summer 2019</option>
                     <option value="fall2018">Srping 2018</option>
                     <option value="summer2018">Summer 2018</option>
                     <option value="spring2018">Fall 2018</option>
