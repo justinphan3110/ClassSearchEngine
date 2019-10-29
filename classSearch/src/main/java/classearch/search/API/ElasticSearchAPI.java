@@ -33,9 +33,12 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ElasticSearchAPI {
     public static final String defaultINDEX = "classes";
+
+    private final String defaultTerm = "default";
 
     // localHost credentials
     private static final String HOST = "localhost";
@@ -120,7 +123,31 @@ public class ElasticSearchAPI {
     }
 
     public List<Class> boolSearch(String index, String text) throws IOException {
-        return boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title","Code")), text);
+        List<String> searchQuery = Arrays.asList(text.split(" "));
+
+        Set<Class> result = new HashSet<>(
+                                boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title", "Code")), text));
+
+        for(int i = 0; i < searchQuery.size(); i++){
+            String current = searchQuery.get(i);
+            List<String> temp = new ArrayList<>(searchQuery);
+            StringBuilder sb = new StringBuilder(current);
+
+            if(sb.length() > 0) {
+                if (current.charAt(current.length() - 1) != 's')
+                    sb.append('s');
+                else
+                    sb.setLength(sb.length() - 1);
+            }
+
+            temp.set(i, sb.toString());
+            boolSearch(index, new ArrayList<>(Arrays.asList("Description", "Title", "Code")), String.join(" ", temp))
+                    .forEach(c -> result.add(c));
+
+        }
+
+
+        return new ArrayList<>(result);
     }
 
 
@@ -138,7 +165,6 @@ public class ElasticSearchAPI {
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
         List<Class> classList = classExtract(searchResponse.toString());
-        Collections.sort(classList);
 
         return classList;
     }
@@ -173,7 +199,8 @@ public class ElasticSearchAPI {
                    source.getString("Catalog"),
                    source.getString("Title"),
                    source.getString("Description"),
-                   source.getString("Credit")
+                   source.getString("Credit"),
+                   Arrays.asList(source.getString("Term").split(" "))
            ));
         });
 
@@ -197,19 +224,26 @@ public class ElasticSearchAPI {
                     meeting.getString("Room"),
                     Integer.parseInt(meeting.getString("number")),
                     meeting.getString("DayTime"),
-                    meeting.getString("Instructor")
+                    mapper(meeting.getJsonObject("Instructor"))
             ));
         }
 
         return meetingMap;
     }
 
+    private Map<String, String> mapper(JsonObject jsonObject) {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", jsonObject.getString("name"));
+        map.put("quality", jsonObject.getString("quality"));
+        map.put("difficulty", jsonObject.getString("difficulty"));
+        return map;
+    }
 
     public static void main(String[] args) throws IOException {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
 
         System.out.println("connected");
-        List<Class> ans = api.boolSearch(defaultINDEX, "acct100");
+        List<Class> ans = api.boolSearch(defaultINDEX, "stocks");
 //        List<Class> ans = api.queryString("fall2019", "eecs");
         System.out.println(ans);
 

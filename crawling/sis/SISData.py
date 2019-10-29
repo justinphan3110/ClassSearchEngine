@@ -1,7 +1,9 @@
 import xml.etree.ElementTree as ET
 from pymongo import MongoClient
+import json
 
 class SISData:
+    
     # db = None
     def __init__(self):
         connection = MongoClient('localhost', 27017)
@@ -36,13 +38,24 @@ class SISData:
                           , 'Title': classInfo.find('CourseTitleLong').text 
                           , 'Credit': classInfo.find('UnitsRange').text 
                           ,  'DayTime': meetingInfo['DaysTimes']
-                          , 'Instructor': meetingInfo['Instructor']
+                          , 'Instructor': self.ratingInstructor(meetingInfo['Instructor'])
                           , 'Room': meetingInfo['Room']
                           , 'Description': meetingInfo['Description']
                           , 'number': classInfo.attrib['number']
                           , 'Code': classInfo.find('Subject').text.lower() + classInfo.find('CatalogNbr').text
                           , 'Component' : classInfo.find('ComponentCode').text
                           })
+
+    def ratingInstructor(self, instructorName):
+        json_file = open('/home/lnp26/github/ClassSearchEngine/lib/rating.json')
+        dataRating = json.load(json_file)
+        length = len(dataRating['name'])
+        for i in range(0, length):
+            if dataRating['name'][str(i)] == instructorName :
+                return  {'name': dataRating['name'][str(i)], 'quality': str(dataRating['quality'][str(i)]), 'difficulty': str(dataRating['difficulty'][str(i)])}
+        return {'name': instructorName, 'quality': 'N/A', 'difficulty': 'N/A'}
+
+
 
     def parseMeeting(self, classInfo):
         meetings = classInfo.find('Meetings')
@@ -81,6 +94,7 @@ class SISData:
         return table
 
 cleaner = SISData()
+# cleaner.reading(r'D:\ClassSearchEngine\crawling\sis\soc.xml')
 # cleaner.reading('/home/long/github/ClassSearchEngine/lib/soc.xml')
 cleaner.reading('/home/lnp26/github/ClassSearchEngine/lib/soc.xml')
 

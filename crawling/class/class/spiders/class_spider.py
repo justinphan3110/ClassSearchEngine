@@ -53,7 +53,7 @@ class StockSpider(scrapy.Spider):
                          , 'Credit': title.split('.')[2].strip().rsplit(' ', 1)[0].strip()
                          , 'Description': description[1:-1]
                          , 'Code': subject + catalog + " / " + subject + " " + catalog
-                        #  , 'Term': self.classInfo(subject.upper() + catalog)
+                         , 'Term': self.termOffered(subject + catalog)
                          })
 
   def classInfo(self, code):
@@ -62,6 +62,7 @@ class StockSpider(scrapy.Spider):
       termDict = []
       for term in self.termMap:
         termCol = self.db[self.termMap[term]]
+        # print(self.termMap[term])
         cursor = termCol.find(query)
         # meeting = []
         for m in cursor:
@@ -69,11 +70,24 @@ class StockSpider(scrapy.Spider):
           # del m['number']
           del m['_id']
           m['Term'] = self.termMap[term]
+          # print("termMap: " + m)
           termDict.append(m)
         # if len(meeting) > 0:
         #   termDict.append(meeting)
 
       return termDict
+
+  def termOffered(self, code):
+        query = {'Code': code}
+        termDict = ""
+        for term in self.termMap:
+          termCol = self.db[self.termMap[term]]
+          cursor = termCol.find(query)
+          if cursor.count() != 0:
+            # print(term)
+            termDict += term + " "
+
+        return termDict.strip()
 
 
   def initAndWriteCSV(self, title, description):

@@ -1,9 +1,11 @@
 import React, { useState, Component } from 'react';
 import './App.css';
-import axios from 'axios';
+import {PageView, initGA} from './components/Tracking'; 
 import Search from './components/Search';
 import Class from './components/Class';
+import ReactGA from 'react-ga'
 import {Switch, BrowserRouter as Router, Route} from 'react-router-dom';
+
 
 class App extends Component {
   state ={
@@ -15,6 +17,10 @@ class App extends Component {
 
   }
   
+  componentDidMount(){
+    initGA("UA-150976119-1");
+    PageView();
+  }
   
   render() {
     return(
@@ -23,7 +29,7 @@ class App extends Component {
           <Switch>
           <Route key="home" path="/" exact strict component={Search}/>
           <Route  path="/search/:searchQuery" exact strict render={({match}) => (
-            <Search key={"searchPage" + match.params.searchQuery} searchQuery={match.params.searchQuery}/>   
+            <Search key={"searchPage" + match.params.searchQuery + Math.random()} searchQuery={match.params.searchQuery}/>   
           )}/>
           <Route path="/class/:code" exact strict render={({match}) => (
             <Class code={match.params.code}/>   

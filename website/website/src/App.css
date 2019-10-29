@@ -25,6 +25,10 @@
     right: 200px;
 }
 
+.popover{
+    max-width: 700px;
+    min-width: 600px
+}
 
 /* .improve-search-button {
   position: fixed;

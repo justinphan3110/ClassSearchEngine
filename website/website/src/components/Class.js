@@ -28,8 +28,8 @@ export default class Class extends React.Component {
       rate: 0,
       comment: '',
 
-      hosting: 'localhost'
-      // hosting: '34.69.198.55'
+      // hosting: 'localhost'
+      hosting: '34.69.198.55'
     };
 
     //console.log(code)
@@ -107,6 +107,7 @@ export default class Class extends React.Component {
       if (ListTag[i].selected)
         tags.push(ListTag[i].value);  
     };
+     
     let url = "http://" + this.state.hosting + ":8080/rating/" + this.state.code + "/rate"
     const rating = {
       code: this.state.code,
@@ -118,14 +119,14 @@ export default class Class extends React.Component {
         rate: this.state.rate
       }
     };
+    // let url = "http://" + this.state.hosting + ":8080/rating/" + this.state.code + '/' + JSON.stringify(rating) 
+    // axios.post(url).then(res => {
+    //   console.log(res);
+    //   console.log(res.data);
+    // });
     
-    axios.post(url, rating).then(res => {
-      console.log(res);
-      console.log(res.data);
-    });
-    
-    console.log(rating);
-    console.log(url);
+    // console.log(rating);
+    // console.log(url);
   }
  
  
