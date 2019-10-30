@@ -30,6 +30,14 @@
     min-width: 600px
 }
 
+/** responsive for mobile phone **/
+@media only screen and (max-width: 600px) {
+    .popover {
+        max-width: 200px;
+        min-width: 100px
+    }
+}
+
 /* .improve-search-button {
   position: fixed;
   bottom: 100%;

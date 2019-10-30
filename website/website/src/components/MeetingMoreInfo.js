@@ -84,7 +84,7 @@ class MeetingMoreInfo extends Component {
            <UncontrolledPopover classNAme="meetingInfoContainer" placement="auto"  trigger="legacy" 
                     flip={false} target={this.state.code}>
             <PopoverBody>
-            <Table size="lg">
+            <Table responsive size="lg">
             <thead key={this.state.code + "header"}>
                 <tr>
                 <th>#</th>
