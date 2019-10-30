@@ -34,7 +34,7 @@ class SISData:
 
         collection.insert_one({
                             'Subject': classInfo.find('Subject').text
-                          , 'Catalog': classInfo.find('CatalogNbr').text
+                          , 'Catalog': classInfo.find('CatalogNbr').text.lower()
                           , 'Title': classInfo.find('CourseTitleLong').text 
                           , 'Credit': classInfo.find('UnitsRange').text 
                           ,  'DayTime': meetingInfo['DaysTimes']
