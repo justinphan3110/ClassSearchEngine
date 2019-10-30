@@ -47,8 +47,8 @@ class SISData:
                           })
 
     def ratingInstructor(self, instructorName):
-        # json_file = open('/home/lnp26/github/ClassSearchEngine/lib/rating.json')
-        json_file = open('/home/long/github/ClassSearchEngine/lib/rating.json')
+        json_file = open('/home/lnp26/github/ClassSearchEngine/lib/rating.json')
+        # json_file = open('/home/long/github/ClassSearchEngine/lib/rating.json')
         dataRating = json.load(json_file)
         length = len(dataRating['name'])
         for i in range(0, length):
