@@ -90,8 +90,8 @@ class Search extends Component {
         return (
           <tr key={(c.subject.toUpperCase()) + c.id}>
             <td>{(c.subject.toUpperCase())}</td>
-            <td>{c.id}</td>
-            <td>{c.title}   </td>
+            <td>{c.id.toUpperCase()}</td>
+            <td className="capitalize">{c.title}   </td>
             <MoreDescription description={c.description} code={(c.subject.toUpperCase()) + c.id} />
             <MeetingMoreInfo term={this.state.term} code={c.subject + c.id} />
           </tr>
@@ -105,7 +105,7 @@ class Search extends Component {
 
     return (
       <div className="Search">
-        <h1>Class Search</h1>
+        <h1>Fast Class Search</h1>
         <Button class="testbutton" color="primary" onClick={this.toggleNewSearch.bind(this)}>Search</Button>
         <Modal isOpen={this.state.newSearchModal} toggle={this.toggleNewSearch.bind(this)}>
           <ModalHeader toggle={this.toggleNewSearch.bind(this)}>Search for a class code or any topics</ModalHeader>
