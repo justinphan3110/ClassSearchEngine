@@ -105,7 +105,7 @@ class Search extends Component {
 
     return (
       <div className="Search">
-        <h1>Class Search</h1>
+        <h1>Fast Class Search</h1>
         <Button class="testbutton" color="primary" onClick={this.toggleNewSearch.bind(this)}>Search</Button>
         <Modal isOpen={this.state.newSearchModal} toggle={this.toggleNewSearch.bind(this)}>
           <ModalHeader toggle={this.toggleNewSearch.bind(this)}>Search for a class code or any topics</ModalHeader>
