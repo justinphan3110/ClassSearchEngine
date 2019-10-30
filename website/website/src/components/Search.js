@@ -90,8 +90,8 @@ class Search extends Component {
         return (
           <tr key={(c.subject.toUpperCase()) + c.id}>
             <td>{(c.subject.toUpperCase())}</td>
-            <td>{c.id}</td>
-            <td>{c.title}   </td>
+            <td>{c.id.toUpperCase()}</td>
+            <td className="capitalize">{c.title}   </td>
             <MoreDescription description={c.description} code={(c.subject.toUpperCase()) + c.id} />
             <MeetingMoreInfo term={this.state.term} code={c.subject + c.id} />
           </tr>
