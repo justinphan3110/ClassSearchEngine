@@ -168,7 +168,7 @@ class Search extends Component {
           </Table>
         </div>
 
-        {/*<HelpDesk />*/}
+        <HelpDesk />
       </div>
     );
   }
