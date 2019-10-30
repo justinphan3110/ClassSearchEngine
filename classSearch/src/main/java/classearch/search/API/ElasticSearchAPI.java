@@ -157,9 +157,23 @@ public class ElasticSearchAPI {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
 
-        for(String filed: fields)
-            qb.should(new MatchPhraseQueryBuilder(filed, text).slop(defaultSLOP));
+        for(String field: fields) {
+            int boostFactor;
 
+            switch (field){
+                case "Code":
+                    boostFactor = 3;
+                    break;
+                case "Title":
+                    boostFactor = 2;
+                    break;
+                default:
+                    boostFactor = 1;
+                    break;
+            }
+            System.out.println("BoostFactor: " + boostFactor + " for " + field);
+            qb.should(new MatchPhraseQueryBuilder(field, text).boost(boostFactor).slop(defaultSLOP));
+        }
         searchSourceBuilder.query(qb).size(50);
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
@@ -192,7 +206,7 @@ public class ElasticSearchAPI {
            JsonObject source = ((JsonObject) cl).getJsonObject("_source");
 
            System.out.println(source.toString());
-           System.out.println(source.getString("Subject"));
+//           System.out.println(source.getString("Subject"));
 
            result.add(Class.of(
                    source.getString("Subject"),
@@ -243,7 +257,7 @@ public class ElasticSearchAPI {
         ElasticSearchAPI api = ElasticSearchAPI.makeConnection();
 
         System.out.println("connected");
-        List<Class> ans = api.boolSearch(defaultINDEX, "stocks");
+        List<Class> ans = api.boolSearch(defaultINDEX, "acct101");
 //        List<Class> ans = api.queryString("fall2019", "eecs");
         System.out.println(ans);
 
