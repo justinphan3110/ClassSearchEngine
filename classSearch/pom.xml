@@ -72,7 +72,7 @@
 
     <properties>
         <elasticsearch.version>7.3.2</elasticsearch.version>
-        <mongodbDriver.version>3.11.1</mongodbDriver.version>
+        <mongodbDriver.version>3.11.3</mongodbDriver.version>
     </properties>
 
 
